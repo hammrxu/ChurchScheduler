@@ -12,7 +12,7 @@ Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
 
 *modified parts: all constrains has removed. Only primary key are keeped for all database tables.
 
-###Table Lists:
+### Table Lists:
 
 Customers: stores customer’s data.
 
