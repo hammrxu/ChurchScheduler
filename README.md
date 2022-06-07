@@ -82,7 +82,29 @@ example: <?php include "variables.php"?>
    2. Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber and Aaron Swartz created Markdown in 2004 as a markup language that is appealing to human readers in its source code form. Standardization: From 2012, a group of people, including Jeff Atwood and John MacFarlane, launched what Atwood characterised as a standardisation effort.
    
    
+### :droplet:Windows CMD Command Leaned
+   1. In ordor to ignore the myPhpAdmin folder changes in git, I want to add a .gitignore file in project root folder to declar git excludes. [^1]
+   So will do:[^2]
+   - cd to another dirve folders with path.
+   - create a file called .gitignore
+   - save with my exclude folder names
    
+   Below are the scripts
+   
+   
+   ```C:\Users\SampleUser>```
+   
+   ```
+   \>cd /d E:\sampleFolder\samplleProject\
+   \>notepad .gitignore
+   Will alert no this fild, click create.
+   Enter **filename/** in the Notepad, and save it, quit.
+   ```
+   
+   
+
+
+
    
    
 # :sweat_drops:SQL File
