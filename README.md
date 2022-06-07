@@ -1,22 +1,22 @@
-# Welcome to phpDemo
+# :sweat_drops:Welcome to phpDemo
 
-### About
+### :droplet:About
 This repository is created by Hammer for personal study progress recordings on PHP interaction with mysql database.
 
 Tools this phpDemo used: [Phpstudy](https://www.xp.cn/)(to build environment of MySQL5.7.26, Apache2.4.39, php7.0.9, SQL_Front5.3), [Vscode Editor](https://code.visualstudio.com/), [phpMyAdmin4.8.5](https://www.phpmyadmin.net/downloads/)
 
-### Features and Developing
+### :droplet:Features and Developing
 
 Finished : Filer Searching, 
 Developing: Create Table, Edit Data(table, and fields)
 
-### TODO
+### :droplet:TODO
 THINKING...
 
-# Learned Throughout This Progress:
+# :sweat_drops:Learned Throughout This Progress:
 
 
-### PHP Leaned
+### :droplet:PHP Leaned
 1. PHP is a interpreting language that run downwards, not like javascript(do all the scripts first and then render the page). .......when try to display a php variables(echo string) declared at middle of web at the very beginning, it will fail.
 
 2. The difference between single quote and double quote. [From Link](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.single)
@@ -35,7 +35,11 @@ THINKING...
 4. Cannot call function,variables that declared at other php pages.
    >SYSTEM OUTPUT WILL BE: Uncaught Error: Call to undefined function alert() in xxx
 
-5. <button onclick="function()">->in my Example <button onclick="document.getElementById('targetidname').classList.add('AnotherClassName');"> It was not working. After research, mixing other language in 
+5. ```<button onclick="function()">```
+   in my Example 
+   ```<button onclick="document.getElementById('targetidname').classList.add('AnotherClassName');">``` 
+   It was not working. After research, mixing other language in html file is a bad practice. 
+   >Unobtrusive JavaScript: it is a general approach to the use of client-side JavaScript in web pages so that if JavaScript features are partially or fully absent in a user's web browser, then the user notices as little as possible any lack of the web page's JavaScript functionality.
 
 6. PHP Library Import statement: include,include_once, require, require_once
 example: <?php include "variables.php"?>
@@ -66,7 +70,7 @@ example: <?php include "variables.php"?>
    
    
    
-### Markdown .md Leaned
+### :droplet:Markdown .md Leaned
    1. What you have seen in this markdown file.
    2. Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber and Aaron Swartz created Markdown in 2004 as a markup language that is appealing to human readers in its source code form. Standardization: From 2012, a group of people, including Jeff Atwood and John MacFarlane, launched what Atwood characterised as a standardisation effort.
    
@@ -74,7 +78,7 @@ example: <?php include "variables.php"?>
    
    
    
-# SQL File
+# :sweat_drops:SQL File
 *mysqlsampledatabase.sql has **been modified** from the one below:
 
 Name: MySQL Sample Database classicmodels
