@@ -62,9 +62,16 @@ example: <?php include "variables.php"?>
     }
     ```
     You can write this:
-    ```
-    $result = $condition ? 'foo' : 'bar';
-    ```
+   
+    ```$result = $condition ? 'foo' : 'bar';```
+   
+    Since PHP 5.3, it's possible to leave out the lefthand operand, allowing for even shorter expressions:
+    ```$result = $condition ?: 'bar';```
+    
+    Since PHP 7.4, encouraged to use bracked for chaining
+    ```1 ? 2 : 3 ? 4 : 5;   // deprecated```
+    ```(1 ? 2 : 3) ? 4 : 5; // ok```
+    
 
    
    
