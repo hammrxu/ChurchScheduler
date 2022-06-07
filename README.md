@@ -43,9 +43,11 @@ Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
     **Double quote "**, >with special Escaped characters: \n \r \t \v \e \f \" \$	and so on. 
     Other, we can use php varialbes inside **double quotes**. Especially useful in writing sql query in my case.
     For example: 
+    ```
     $table = "customers";
     $field = "customerNumber";
     $sql = "SELECT * FROM {$table} WHERE {$field} IS NOT NULL "; //must use double quote. 
+    ```
 
 3. Optional to bracket the variable. variable, {variable}. Seems only for human eye to read.
 
@@ -67,10 +69,14 @@ example: <?php include "variables.php"?>
     include: will skip the error part, and rendering the rest.
 
 7. Shorthand comparisons in PHP
-        if ($condition) {
+        ```
+    if ($condition) {
         $result = 'foo' 
     } else {
         $result = 'bar'
     }
-You can write this:
-$result = $condition ? 'foo' : 'bar';
+    ```
+    You can write this:
+    ```
+    $result = $condition ? 'foo' : 'bar';
+    ```
