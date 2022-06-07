@@ -47,14 +47,14 @@ Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
     $field = "customerNumber";
     $sql = "SELECT * FROM {$table} WHERE {$field} IS NOT NULL "; //must use double quote. 
 
-3.Optional to bracket the variable. variable, {variable}. Seems only for human eye to read.
+3. Optional to bracket the variable. variable, {variable}. Seems only for human eye to read.
 
-4.Cannot call function,variables that declared at other php pages.
+4. Cannot call function,variables that declared at other php pages.
 >SYSTEM OUTPUT WILL BE: Uncaught Error: Call to undefined function alert() in xxx
 
-5.<button onclick="function()">->in my Example <button onclick="document.getElementById('targetidname').classList.add('AnotherClassName');"> It was not working. After research, mixing other language in 
+5. <button onclick="function()">->in my Example <button onclick="document.getElementById('targetidname').classList.add('AnotherClassName');"> It was not working. After research, mixing other language in 
 
-6.PHP Library Import statement: include,include_once, require, require_once
+6. PHP Library Import statement: include,include_once, require, require_once
 example: <?php include "variables.php"?>
     When found same variable/contents,will it overwritting or add again?
     include_once: No,Skip it.
