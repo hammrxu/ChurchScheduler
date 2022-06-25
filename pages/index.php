@@ -16,13 +16,13 @@ include_once'../Config/db.php';
     <script>
         $(function(){
             //import static title table
-            $("#main_taible").load("../components/main_table.html");
+            $("#main_table").load("../components/main_table.html");
         });
     </script>
 </head>
 <body>
 
-<div id="main_taible"></div>
+<div id="main_table"></div>
 
 
 

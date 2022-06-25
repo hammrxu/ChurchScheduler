@@ -1,9 +1,9 @@
 <?php
 		
 			$servername = "localhost";
-			$username = "local_user";
-			$password = "localpassword";
-			$dbname = "mysqlsampledatabase";
+			$username = "admin";
+			$password = "admin123";
+			$dbname = "churchScheduler";
 			$conn = new mysqli($servername, $username, $password, $dbname);
 
 ?>
