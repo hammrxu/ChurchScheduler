@@ -1,0 +1,9 @@
+{ 
+    "N_DeleteComfirm": "Comfirm to delete?", 
+    "N_DeleteSys": "Delete action is not confirmed for ",
+    "N_Submited": "submited, refreshing soon",
+    "N_EnterNewName": "Enter New Name: ", 
+    "N_EnterNameComfirm": "Confirm to change the name?", 
+    "N_ChangeSys": "forget the change"
+
+}
