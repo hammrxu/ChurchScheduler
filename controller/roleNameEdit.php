@@ -2,7 +2,9 @@
     $request = $_REQUEST; //a PHP Super Global variable which used to collect data after submitting it from the form
     include "../Config/db.php";
     $query_filed = $request['id'];
-    $newName =  $request['newName'];
+    $search = array("'","&",'"',"|","!","#","$","@","%","^","*");
+    $replace = array("\'","\&",'\"',"\|","\!","\#","\$","\@","%","\^","*");
+    $newName = str_replace($search,$replace,$request['newName']);
 
     // echo $sql;
     if ($conn->connect_error) {

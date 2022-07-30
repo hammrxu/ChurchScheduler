@@ -7,10 +7,8 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    // Set the DELETE SQL data
     
     $sql = "insert into service_group (tname) values('".$query_filed."')";
-    // echo $sql;
+
     $result = $conn->query($sql);
 ?>

@@ -1,17 +1,18 @@
 <?php
     $request = $_REQUEST; //a PHP Super Global variable which used to collect data after submitting it from the form
     include "../Config/db.php";
-    $query_filed = $request['newhelper'];
+    $name = $request['newhelper'];
+    $name_p = $request['newhelper_p'];
+    $email = $request['email'];
+    $notify = $request['notify'];
 
     // echo $sql;
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    // Set the DELETE SQL data
     
-    $sql = "insert into helper (tname) values('".$query_filed."')";
-    // echo $sql;
+    $sql = "insert into service_helper (tname, email,notify,last_edit) values('$name','$email',$notify,NOW())";
+    echo $sql;
     $result = $conn->query($sql);
 
 ?>

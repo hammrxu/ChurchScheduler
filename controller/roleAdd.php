@@ -1,7 +1,7 @@
 <?php
     $request = $_REQUEST; //a PHP Super Global variable which used to collect data after submitting it from the form
     include "../Config/db.php";
-    $query_filed = $request['newRole'];
+    $query_filed = $request['newrole'];
 
     // echo $sql;
     if ($conn->connect_error) {

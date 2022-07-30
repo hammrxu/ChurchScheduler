@@ -13,31 +13,27 @@ include_once'../Config/db.php';
 
     </style>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script>
-        $(function(){
-            //import static title table
-            $("#main_table").load("../components/main_table.html");
-        });
-    </script>
+
 </head>
 <body>
-
-<div id="main_table"></div>
+<?php
+    require_once "../components/main_table.html";
+?>
 
 
 
 <!-- TODO: 默认显示发布好的未来6个月的日期文字表，以及日期表上的服侍同工 -->
-<div>主页默认显示发布好的未来6个月的日期文字表，以及日期表上的服侍同工，示例如下：</div>
+<div>Defalt will show Coming 6-Months schedule for all</div>
 
 <br><br><br>
-<div>当前时间:2022-06-25</div>
+<div id="current_date"></div>
 
 <br><br>
 <br>
 <div>选择显示的月份：</div>
  <select name="schedules" id="schedule_select_list">
-  <option value="">之前6个月</option>
-  <option value="saab">未来6个月</option>
+    <option value="coming" selected>Coming 6-Months</option>
+    <option value="past" >Past 6-Months</option>
 </select>
 
 <br><br><br>
@@ -414,4 +410,9 @@ include_once'../Config/db.php';
 </body>
 
 <script src="../js/main.js"></script>
+<script>
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+date = new Date().toLocaleDateString("en-US", options);
+document.getElementById("current_date").innerHTML = date;
+</script>
 </html>

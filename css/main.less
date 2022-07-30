@@ -1,0 +1,148 @@
+body, body div{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+}
+body{
+    min-width: 400px;
+}
+.title-table-wrap>div{
+    span.t-title{
+        font-weight: 900;
+        font-size: larger;
+        text-transform: uppercase;
+    }
+    .title-table{
+        td{
+            text-align: center;
+            width:150px;
+            height:50px;
+            text-transform: capitalize;
+        }
+        button{
+            width:100%;
+            height:100%;
+            
+        }
+    }
+}
+
+.title-table-wrap, h1,h2{
+    padding:15px 0px;
+    border-bottom:1px black solid;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+    thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+    thead td{
+        text-transform: capitalize;
+    }
+
+    th,td,caption {
+        padding: 12px 15px;
+    }
+
+    caption{
+        font-weight: 700;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+
+    tbody tr.active-row {
+        font-weight: bold;
+        color: #009879;
+    }
+}
+
+// #wrap{
+//     overflow: scroll;
+// }
+
+@media screen and (max-width: 600px) {
+    .styled-table{
+        thead {
+            display: none;
+        }
+        td {
+        display: flex;
+        }
+        
+        td::before {
+        content: attr(label);
+        // font-weight: bold;
+        // width: 120px;
+        min-width: 80px;
+        }
+    }
+  }
+
+select{
+    width:3vw;
+}
+
+td{
+    max-width: 120px;
+}
+#big-table-wrap{
+    width:90vw;
+    // height:100vh;
+    .full-width{
+        width:90vw;
+    }
+}
+
+
+.add-button{
+    margin:15px 15px;
+    padding:5px;
+}
+
+form.add-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    group{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    div button, group{
+        margin:7px;
+    }
+
+    div{
+        margin:20px;
+    }
+}
+
+span.system{
+    margin:7px;
+}
+
+.cap{
+    text-transform: capitalize;
+}

@@ -10,6 +10,6 @@
 
     // Set the DELETE SQL data
     $sql = "delete from service_group where id ='".$query_filed."'";
-    // echo $sql;
+
     $result = $conn->query($sql);
 ?>

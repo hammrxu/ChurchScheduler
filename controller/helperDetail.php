@@ -8,7 +8,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "delete from service_helper where id ='".$query_filed."'";
+
+    $sql = "select * from service_helper where id = '$query_filed' order by tname ASC";
     // echo $sql;
     $result = $conn->query($sql);
+    
+    $emparray = array();
+    while($row =mysqli_fetch_assoc($result))
+    {
+        $emparray[] = $row;
+    }
+    echo json_encode($emparray);
 ?>

@@ -12,4 +12,5 @@
     $sql = "delete from service_role where id ='".$query_filed."'";
     // echo $sql;
     $result = $conn->query($sql);
+    
 ?>
