@@ -33,14 +33,14 @@ include_once'../Config/db.php';
 
 <br><br>
 <br>
-<div>选择显示的月份：</div>
+<div>Please Choose</div>
  <select name="schedules" id="schedule_select_list">
     <option value="coming" selected>Coming 6-Months</option>
     <option value="past" >Past 6-Months</option>
 </select>
 
 <br><br><br>
-未来6个月服事表
+Coming 6-Months
 <!-- 2022-06 -->
 <table class="styled-table">
     <caption>Service Schedules 2022-06</caption>
