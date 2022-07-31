@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Cocoluck';
+    src: local('Cocoluck'), url('../fonts/Cocoluck-Wymj4.otf') format('opentype');
+  }
 body, body div{
     display:flex;
     flex-direction: column;
@@ -6,32 +10,44 @@ body, body div{
 }
 body{
     min-width: 400px;
+    background-color: #1D2228;
+    color:#eef0f0;
 }
 .title-table-wrap>div{
     span.t-title{
-        font-weight: 900;
-        font-size: larger;
+        font-weight: 600;
+        // font-size: xxx-large;
         text-transform: uppercase;
+        font-family:Cocoluck ;
+        
     }
+    
+
     .title-table{
+        border-radius: 5px;
         td{
             text-align: center;
             width:150px;
             height:50px;
             text-transform: capitalize;
+            border:none;
         }
         button{
             width:100%;
-            height:100%;
+            height:70%;
             
         }
     }
 }
 
+.title-talbe-wrap{
+    border:none;
+}
 .title-table-wrap, h1,h2{
     padding:15px 0px;
-    border-bottom:1px black solid;
+    border-bottom:1px #FB8122 solid;
 }
+
 
 .styled-table {
     border-collapse: collapse;
@@ -42,38 +58,63 @@ body{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     
     thead tr {
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
+        
+        color: #f8fcfc;
+        td{
+            text-align: center;
+        }
     }
-    thead td{
-        text-transform: capitalize;
+    
+    thead td:first-child{
+        border-radius: 10px 0 0 0 ;
+    }
+    thead td:last-child{
+        border-radius:  0 10px 0 0 ;
     }
 
-    th,td,caption {
+    
+    td{
+        padding: 10px 10px;
+        font-weight: 500;
+        font-size: larger;
+    }
+    th td,caption {
         padding: 12px 15px;
+        font-weight: 900;
+        font-size: large;
     }
-
+  
+    thead td{
+        background-color: #FB8122;
+        text-transform: capitalize;
+        font-weight: 800;
+        
+    }
+    
     caption{
-        font-weight: 700;
+        font-weight: 900;
+        font-size: x-large;
+        margin-bottom: 20px;;
+        color:#FB8122;
     }
 
     tbody tr {
-        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid #dac2c2;
+        text-align: center;
+    }
+    tbody td{
+        text-align: center;
     }
 
     tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
+        background-color: #494b4d;
     }
 
-    tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
+    td button{
+        margin:5px 0;
     }
 
-    tbody tr.active-row {
-        font-weight: bold;
-        color: #009879;
-    }
+
 }
 
 // #wrap{
@@ -99,7 +140,7 @@ body{
   }
 
 select{
-    width:3vw;
+    width:115px;
 }
 
 td{
@@ -114,10 +155,7 @@ td{
 }
 
 
-.add-button{
-    margin:15px 15px;
-    padding:5px;
-}
+
 
 form.add-form{
     display: flex;
@@ -145,4 +183,121 @@ span.system{
 
 .cap{
     text-transform: capitalize;
+}
+
+/* CSS */
+.button-8 {
+    background-color: #E1E2E2;
+    border-radius: 3px;
+    border: 1px solid #7aa7c7;
+    box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #265a81;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 8px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+  }
+  
+  .button-8:hover,
+  .button-8:focus {
+    background-color: #f8b683;
+    color: #265a81;
+  }
+  
+  .button-8:focus {
+    box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+  }
+  
+  .button-8:active {
+    background-color: #e2985f;
+    box-shadow: none;
+    color: #265a81;
+  }
+
+  .fixed-button{
+    width:80px;
+    height:30px;
+  }
+  .fixed-button2{
+    width:115px;
+    height:30px;
+  }
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #1D2228;
+  display: block;
+  width:100vw;
+
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: #f8fcfc;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top:50px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

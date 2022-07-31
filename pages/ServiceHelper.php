@@ -18,6 +18,9 @@
 
 <body>
 <?php
+    require_once("../components/navBar.html");
+?>
+<?php
     require_once("../components/main_table.html");
 ?>
     <div>
@@ -47,8 +50,8 @@
                                 <tr>
                                     <td value=". $row['id'] . ">" . $row["tname"] . "</td>
                                     <td>
-                                        <button class='delete_instance cap'>delete</button>
-                                        <button class='edit_instance_detail cap'>edit</button>
+                                        <button class='delete_instance cap fixed-button'>delete</button>
+                                        <button class='edit_instance_detail cap fixed-button'>edit</button>
                                     </td>
                                 </tr>";
                     }
@@ -165,4 +168,10 @@
                 });
         })
     });
+</script>
+
+<!-- put at end -->
+<script>
+    $("button").addClass("button-8");
+    $("button").attr("role","button");
 </script>

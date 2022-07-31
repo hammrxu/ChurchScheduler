@@ -18,6 +18,9 @@
 
 <body>
 <?php
+    require_once("../components/navBar.html");
+?>
+<?php
     require_once("../components/main_table.html");
 ?>
     <div>
@@ -63,8 +66,8 @@
                                 <tr>
                                     <td value=". $row['id'] . ">" . $row['tname'] . "</td>
                                     <td>
-                                        <button class='delete_instance cap'>delete</button>
-                                        <button class='edit_instance_name cap'>rename</button>
+                                        <button class='delete_instance cap fixed-button'>delete</button>
+                                        <button class='edit_instance_name cap fixed-button'>rename</button>
                                     </td>";
                                     //show helpers
                             echo "<td>".$nameList."</td>";
@@ -77,14 +80,14 @@
                                             $sql3 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_group_helper.helper_id_fk FROM ct_group_helper where group_id_fk = ".$row['id'].")";
                                             $result3 = $conn->query($sql3);
                                             if ($result3->num_rows > 0) {
-                                                echo " <option disabled selected value> -- select -- </option>";
+                                                echo " <option disabled selected value>  </option>";
                                                 while ($row3 = $result3->fetch_assoc()) {
                                                     echo "<option value = ".$row3['id'].">".$row3['tname']."</option>";
                                                 }
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='group_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap' onclick='setTimeout(function() {location.reload();}, 100);'>add</button>
+                                            <button type='submit' class='connect cap fixed-button2 ' onclick='setTimeout(function() {location.reload();}, 100);'>add</button>
                                         </form>
                                         
                                     </td>
@@ -98,14 +101,14 @@
                                             $sql5 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = ".$row['id'];
                                             $result5 = $conn->query($sql5);
                                             if ($result5->num_rows > 0) {
-                                                echo " <option disabled selected value> -- select -- </option>";
+                                                echo " <option disabled selected value> </option>";
                                                 while ($row5 = $result5->fetch_assoc()) {
                                                     echo "<option value = ".$row5['helper_id_fk'].">".$row5['hname']."</option>";
                                                 }
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='group_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap' onclick='setTimeout(function() {location.reload();}, 100);'>remove</button>
+                                            <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>remove</button>
                                         </form>
                                     </td>
                                             
@@ -217,3 +220,8 @@
     
 </script>
 
+<!-- put at end -->
+<script>
+    $("button").addClass("button-8");
+    $("button").attr("role","button");
+</script>

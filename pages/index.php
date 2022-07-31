@@ -17,6 +17,9 @@ include_once'../Config/db.php';
 </head>
 <body>
 <?php
+    require_once("../components/navBar.html");
+?>
+<?php
     require_once "../components/main_table.html";
 ?>
 

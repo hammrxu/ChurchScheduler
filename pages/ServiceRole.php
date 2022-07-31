@@ -18,6 +18,9 @@
 
 <body>
 <?php
+    require_once("../components/navBar.html");
+?>
+<?php
     require_once("../components/main_table.html");
 ?>
     <div id="wrap">
@@ -67,8 +70,8 @@
                                 <tr>
                                     <td value=". $row['id'] . ">" . $row['tname'] . "</td>
                                     <td>
-                                        <button class='delete_instance cap'>delete</button>
-                                        <button class='edit_instance_name cap'>rename</button>
+                                        <button class='delete_instance cap fixed-button'>delete</button>
+                                        <button class='edit_instance_name cap fixed-button'>rename</button>
                                     </td>";
                                     //show groups
                             echo "<td>".$nameList."</td>";
@@ -82,16 +85,16 @@
                                             $sql3 = "SELECT tname, id FROM service_group WHERE service_group.id NOT IN (SELECT ct_role_group.group_id_fk FROM ct_role_group where role_id_fk = ".$row['id'].")";
                                             $result3 = $conn->query($sql3);
                                             if ($result3->num_rows > 0) {
-                                                echo " <option disabled selected value> -- select -- </option>";
+                                                echo " <option disabled selected value> </option>";
                                                 while ($row3 = $result3->fetch_assoc()) {
                                                     echo "<option value = ".$row3['id'].">".$row3['tname']."</option>";
                                                 }
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='role_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap' 
+                                            <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
-                                            >G_add</button>
+                                            >Add Group </button>
                                         </form>
                                         
                                     </td>
@@ -105,16 +108,16 @@
                                             $sql5 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = ".$row['id'];
                                             $result5 = $conn->query($sql5);
                                             if ($result5->num_rows > 0) {
-                                                echo " <option disabled selected value> -- select -- </option>";
+                                                echo " <option disabled selected value> </option>";
                                                 while ($row5 = $result5->fetch_assoc()) {
                                                     echo "<option value = ".$row5['group_id_fk'].">".$row5['hname']."</option>";
                                                 }
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='role_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap' 
+                                            <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
-                                            >G_remove</button>
+                                            >Remove Group</button>
                                         </form>
                                     </td>";
 
@@ -143,16 +146,16 @@
                                                         $sql8 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_role_helper.helper_id_fk FROM ct_role_helper where role_id_fk = ".$row['id'].")";
                                                         $result8 = $conn->query($sql8);
                                                         if ($result8->num_rows > 0) {
-                                                            echo " <option disabled selected value> -- select -- </option>";
+                                                            echo " <option disabled selected value> </option>";
                                                             while ($row8 = $result8->fetch_assoc()) {
                                                                 echo "<option value = ".$row8['id'].">".$row8['tname']."</option>";
                                                             }
                                                         }        
                                             echo "</select>
                                                         <input type='hidden' name='role_id' value=". $row['id'] .">
-                                                        <button type='submit' class='connect cap' 
+                                                        <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
-                                                        >H_add</button>
+                                                        >Add Helper</button>
                                                     </form>
                                                     
                                                 </td>
@@ -167,16 +170,16 @@
                                                         $sql9 = "SELECT service_role.id,service_role.tname,ct_role_helper.helper_id_fk,service_helper.tname as hname FROM service_role LEFT JOIN ct_role_helper ON ct_role_helper.role_id_fk = service_role.id LEFT JOIN service_helper ON ct_role_helper.helper_id_fk = service_helper.id where service_role.id = ".$row['id'];
                                                         $result9 = $conn->query($sql9);
                                                         if ($result9->num_rows > 0) {
-                                                            echo " <option disabled selected value> -- select -- </option>";
+                                                            echo " <option disabled selected value> </option>";
                                                             while ($row9 = $result9->fetch_assoc()) {
                                                                 echo "<option value = ".$row9['helper_id_fk'].">".$row9['hname']."</option>";
                                                             }
                                                         }        
                                             echo "</select>
                                                         <input type='hidden' name='role_id' value=". $row['id'] .">
-                                                        <button type='submit' class='connect cap' 
+                                                        <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
-                                                        >H_remove</button>
+                                                        >Remove Helper</button>
                                                     </form>
                                                 </td>";       
                                                 
@@ -289,5 +292,10 @@
     }
 
     
+</script>
+<!-- put at end -->
+<script>
+    $("button").addClass("button-8");
+    $("button").attr("role","button");
 </script>
 

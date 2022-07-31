@@ -1,0 +1,67 @@
+
+.dropelements{
+    width:100vw;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.dropzone{
+    /* Prevent the user selecting text in the example */
+    user-select: none;
+    .dropzone.dragover {
+        background-color: purple;
+    }
+    .draggable_box{
+        display:flex;
+        border:1px solid red;
+        width:45vw;
+        height:50vh;
+        flex-wrap: wrap;
+        flex-direction: column;
+        
+    }
+    .draggable_helper_box{
+        display:flex;
+        position:relative;
+        align-items: flex-start;
+    }
+    .draggable_group_box{
+        display:flex;
+        position:relative;
+        align-items: flex-start;
+    }
+    .selector{
+        width: 80px;
+        height: 30px;
+        border:1px solid red;
+        padding:5px;
+        margin:3px;
+        display:flex;
+        flex-direction: row;
+        justify-content: left;
+        flex-wrap: wrap;
+        
+    }
+    .selector:hover{
+        cursor:move;
+    }
+    .dragging {
+        opacity: .5;
+    }
+    .draggable_group{
+        background-color: rgb(208, 231, 197);
+        color:black;
+    }
+    .draggable_helper{
+        background-color: rgb(184, 231, 225);
+        color:black;
+    }
+}
+table td{
+    border:1px solid rgb(214, 190, 189);
+    height: 100px;
+    user-select: none;
+}
+
+
+
