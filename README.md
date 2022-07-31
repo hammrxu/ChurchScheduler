@@ -102,34 +102,26 @@ example: <?php include "variables.php"?>
    ```
    
    
-
-
-
-   
-   
 # :sweat_drops:SQL File
-*mysqlsampledatabase.sql has **been modified** from the one below:
-
-Name: MySQL Sample Database classicmodels
-[Link:](http://www.mysqltutorial.org/mysql-sample-database.aspx)
+chuchscheduler.sql
 
 *modified parts: all constrains has removed. Only primary key are keeped for all database tables. Databse name has been removed, here use **mysqlsampledatabase** as database name.
 
 ### Table Lists:
 
-- **Customers**: stores customer’s data.
+- **service_helper**: stores service helper’s data.
 
-- **Products**: stores a list of scale model cars.
+- **service_gorup**: stores service gorup’s data.
 
-- **ProductLines**: stores a list of product line categories.
+- **service_role**: stores service role’s data.
 
-- **Orders**: stores sales orders placed by customers.
+- **service_plan**: not using.
 
-- **OrderDetails**: stores sales order line items for each sales order.
+- **sundays**: stores every sundays.
 
-- **Payments**: stores payments made by customers based on their accounts.
+- **ct_role_group**: cross table between role and group.
 
-- **Employees**: stores all employee information as well as the organization structure such as who reports to whom.
+- **ct_role_helper**:  cross table between role and helper.
 
-- **Offices**: stores sales office data.
+- **ct_group_helper**:  cross table between group and helper.
 
