@@ -1,16 +1,17 @@
-# :sweat_drops:Welcome to phpDemo
+# :sweat_drops:Welcome to Church Scheduler
 
 ### :droplet:About
 This repository is created by Hammer for personal study progress recordings on PHP interaction with mysql database.
 
-Tools this phpDemo used: [Phpstudy](https://www.xp.cn/)(to build environment of MySQL5.7.26, Apache2.4.39, php7.0.9, SQL_Front5.3), [Vscode Editor](https://code.visualstudio.com/), [phpMyAdmin4.8.5](https://www.phpmyadmin.net/downloads/)
+Tools this Church Scheduler used: [Phpstudy](https://www.xp.cn/)(to build environment of MySQL5.7.26, Apache2.4.39, php7.0.9, SQL_Front5.3), [Vscode Editor](https://code.visualstudio.com/), [phpMyAdmin4.8.5](https://www.phpmyadmin.net/downloads/)
 
 ### :droplet:Features and Developing
 
-Finished : Filer Searching, 
-Developing: Create Table, Edit Data(table, and fields)
+Finished : Manage Role, Group, Helper, Simple Scheudler
+Developing:  Better Scheduling Function
 
 ### :droplet:TODO
+Automatically Send Email To New Registred User, Differentiate, Draggable Scheduler In Eligent Way.
 THINKING...
 
 # :sweat_drops:Learned Throughout This Progress:
