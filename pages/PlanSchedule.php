@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Scheduler</title>
     <link href="../css/main.css" rel="stylesheet">
-    <!-- <link href="../css/Scheduling.css" rel="stylesheet"> -->
+    <link href="../css/Scheduling.css" rel="stylesheet">
     
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -72,18 +72,22 @@
             $result2 = $conn->query($sql2);
             
             if ($result2->num_rows > 0) {
+                $index =1;
                 while ($row2 = mysqli_fetch_assoc($result2)) {
                     echo "
-                        <tr>
+                        <tr id='row$index'>
+                        
                             <td>".$row2['sunday']."</td>";
+                    $index++;
                     for($i=0;$i<$row_counts;$i++){
                         // 3 start
                         //select helper
-                        echo "<td>";
+                        echo "<td class='wrapper'>";
                                 
                                 $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result3 = $conn->query($sql3);
-                                echo "<select name= role>";
+                                echo"<label>Select Helper</label>";
+                                echo "<select name= role class='helper_select' onchange='func(row$index,this.value);'>";
                                 if ($result3->num_rows > 0) {
                                     while($row3 = mysqli_fetch_assoc($result3)){
                                                 echo "<option>Select Helper</option>";
@@ -91,16 +95,18 @@
                                     }
                                 }
                         echo "</select>";
+                        echo "</br>";
                         // 3 end
                                 // 4 start
                                 //select group
                                 $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result4 = $conn->query($sql4);
-                                echo "<select name= role>";
+                                echo"<label>Select Group</label>";
+                                echo "<select name= group>";
                                 if ($result4->num_rows > 0) {
                                     while($row4 = mysqli_fetch_assoc($result4)){
                                                 echo "<option>Select Group</option>";
-                                                echo "<option value='".$row3['id']."'>".$row3['tname']."</option>";
+                                                echo "<option value='".$row4['id']."'>".$row4['tname']."</option>";
                                     }
                                 }
                         echo "</select></td>";
@@ -243,6 +249,13 @@ document.addEventListener("drop", (event) => {
   }
 });
         
+</script>
+<script>
+    function func(abb,b){
+        console.log(b);
+        row = document.querySelector(`[data-name=${CSS.escape(abb)}]`);
+        console.log(row);
+    }
 </script>
 </html>
 

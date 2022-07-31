@@ -87,7 +87,7 @@
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='group_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap fixed-button2 ' onclick='setTimeout(function() {location.reload();}, 100);'>add</button>
+                                            <button type='submit' class='connect cap fixed-button2 ' onclick='setTimeout(function() {location.reload();}, 100);'>Add Helper</button>
                                         </form>
                                         
                                     </td>
@@ -108,7 +108,7 @@
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='group_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>remove</button>
+                                            <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>Remove Helper</button>
                                         </form>
                                     </td>
                                             

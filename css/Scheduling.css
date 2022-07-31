@@ -1,61 +1,9 @@
-.dropelements {
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.dropzone {
-  /* Prevent the user selecting text in the example */
-  user-select: none;
-}
-.dropzone .dropzone.dragover {
-  background-color: purple;
-}
-.dropzone .draggable_box {
-  display: flex;
-  border: 1px solid red;
-  width: 45vw;
-  height: 50vh;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-.dropzone .draggable_helper_box {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-}
-.dropzone .draggable_group_box {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-}
-.dropzone .selector {
-  width: 80px;
-  height: 30px;
-  border: 1px solid red;
-  padding: 5px;
-  margin: 3px;
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  flex-wrap: wrap;
-}
-.dropzone .selector:hover {
-  cursor: move;
-}
-.dropzone .dragging {
-  opacity: 0.5;
-}
-.dropzone .draggable_group {
-  background-color: #d0e7c5;
-  color: black;
-}
-.dropzone .draggable_helper {
-  background-color: #b8e7e1;
-  color: black;
-}
 table td {
   border: 1px solid #d6bebd;
   height: 100px;
   user-select: none;
+}
+select {
+  padding: 7px;
+  margin: 5px;
 }
