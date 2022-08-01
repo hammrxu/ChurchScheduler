@@ -20,9 +20,6 @@
 <?php
     require_once("../components/navBar.html");
 ?>
-<?php
-    require_once("../components/main_table.html");
-?>
     <div id="wrap">
         <span class="system"></span>
         <div id="manipulate_display"></div>
@@ -47,10 +44,10 @@
                                         <td>manage</td>
                                         <td>groups
                                         <td>add group</td>
-                                        <td>remove group</td>
+                                        <td>del group</td>
                                         <td>helpers
                                         <td>add helper</td>
-                                        <td>remove helper</td>
+                                        <td>del helper</td>
                                     </tr>
                                 </thead>
                         ";
@@ -99,7 +96,7 @@
                                         
                                     </td>
                                 ";
-                                // remove group
+                                // del group
                                 echo "
                                 <td>
                                         <form action='../controller/ConRemoveGroupToRole.php' target='dummyframe' method='POST'>
@@ -117,7 +114,7 @@
                                             <input type='hidden' name='role_id' value=". $row['id'] .">
                                             <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
-                                            >Remove Group</button>
+                                            >del Group</button>
                                         </form>
                                     </td>";
 
@@ -161,7 +158,7 @@
                                                 </td>
                                             ";
                                                 
-                                            // remove helper
+                                            // del helper
                                             echo "
                                             <td>
                                                     <form action='../controller/ConRemoveHelperToRole.php' target='dummyframe' method='POST'>
@@ -179,7 +176,7 @@
                                                         <input type='hidden' name='role_id' value=". $row['id'] .">
                                                         <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
-                                                        >Remove Helper</button>
+                                                        >del Helper</button>
                                                     </form>
                                                 </td>";       
                                                 
@@ -295,7 +292,7 @@
 </script>
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>
 

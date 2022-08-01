@@ -22,9 +22,7 @@
     <?php
         require_once("../components/navBar.html");
     ?>
-    <?php
-        require_once("../components/main_table.html");
-    ?>
+
     <iframe name="dummyframe" style="display:none;"></iframe>
     </br>
     
@@ -261,6 +259,6 @@ document.addEventListener("drop", (event) => {
 
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>

@@ -20,9 +20,7 @@
 <?php
     require_once("../components/navBar.html");
 ?>
-<?php
-    require_once("../components/main_table.html");
-?>
+
     <div>
         <span class="system"></span>
         <div id="manipulate_display"></div>
@@ -172,6 +170,6 @@
 
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>
