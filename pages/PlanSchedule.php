@@ -22,7 +22,6 @@
     <?php
         require_once("../components/navBar.html");
     ?>
-
     <iframe name="dummyframe" style="display:none;"></iframe>
     </br>
     
@@ -84,11 +83,10 @@
                                 
                                 $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result3 = $conn->query($sql3);
-                                echo"<label>Select Helper</label>";
-                                echo "<select name= role class='helper_select' onchange='func(row$index,this.value);'>";
+                                echo"<label>Helper</label>";
+                                echo "<select name= role class='helper_select' onchange='func(row$index,this.value);'><option></option>";
                                 if ($result3->num_rows > 0) {
                                     while($row3 = mysqli_fetch_assoc($result3)){
-                                                echo "<option>Select Helper</option>";
                                                 echo "<option value='".$row3['id']."'>".$row3['tname']."</option>";
                                     }
                                 }
@@ -99,11 +97,10 @@
                                 //select group
                                 $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result4 = $conn->query($sql4);
-                                echo"<label>Select Group</label>";
-                                echo "<select name= group>";
+                                echo"<label>Group</label>";
+                                echo "<select name= group><option></option>";
                                 if ($result4->num_rows > 0) {
                                     while($row4 = mysqli_fetch_assoc($result4)){
-                                                echo "<option>Select Group</option>";
                                                 echo "<option value='".$row4['id']."'>".$row4['tname']."</option>";
                                     }
                                 }
