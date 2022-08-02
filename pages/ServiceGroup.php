@@ -20,15 +20,23 @@
 <?php
     require_once("../components/navBar.html");
 ?>
-<?php
-    require_once("../components/main_table.html");
-?>
     <div>
         <span class="system"></span>
         <div id="manipulate_display"></div>
         <div id="show_add_instance">
         </div>
         <iframe name="dummyframe" style="display:none;"></iframe>
+        <table class='styled-table'>
+            <caption style='text-transform: capitalize;'>service group management</caption>
+            <thead>
+                <tr>
+                    <td>group</td>
+                    <td>manage</td>
+                    <td>helpers
+                    <td>add helper</td>
+                    <td>del helper</td>
+                </tr>
+            </thead>
             <?php
                 // different
                 $table = "service_group"; 
@@ -39,18 +47,6 @@
                 }
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    echo "<table class='styled-table'>
-                                <caption style='text-transform: capitalize;'>service group management</caption>
-                                <thead>
-                                    <tr>
-                                        <td>group</td>
-                                        <td>manage</td>
-                                        <td>helpers
-                                        <td>add helper</td>
-                                        <td>remove helper</td>
-                                    </tr>
-                                </thead>
-                        ";
                     while ($row = $result->fetch_assoc()) {
                         $sql2 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = ".$row['id'];
                         $result2 = $conn->query($sql2);
@@ -92,7 +88,7 @@
                                         
                                     </td>
                                 ";
-                                // remove helper
+                                // del helper
                                 echo "
                                 <td>
                                         <form action='../controller/ConRemoveHelperToGroup.php' target='dummyframe' method='POST'>
@@ -108,13 +104,12 @@
                                             }        
                                 echo "</select>
                                             <input type='hidden' name='group_id' value=". $row['id'] .">
-                                            <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>Remove Helper</button>
+                                            <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>del Helper</button>
                                         </form>
                                     </td>
                                             
                                 </tr>";
                     }
-                    echo "</table>";
                 }
             ?>
         </table>
@@ -222,6 +217,6 @@
 
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>

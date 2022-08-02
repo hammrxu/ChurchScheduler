@@ -20,14 +20,21 @@
 <?php
     require_once("../components/navBar.html");
 ?>
-<?php
-    require_once("../components/main_table.html");
-?>
+
     <div>
         <span class="system"></span>
         <div id="manipulate_display"></div>
         <div id="add_instance" class="helper_detail_box"></div>
         <iframe name="dummyframe" style="display:none;"></iframe>
+        <table class='styled-table'>
+            <caption style='text-transform: capitalize;'>service helper management</caption>
+            <thead>
+                <tr>
+                    <td>helper</td>
+                    <td>manage</td>
+                </tr>
+            </thead>
+
             <?php
                 // different
                 $table = "service_helper"; 
@@ -37,14 +44,6 @@
                 }
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    echo "<table class='styled-table'>
-                                <caption style='text-transform: capitalize;'>service helper management</caption>
-                                <thead>
-                                    <tr>
-                                        <td>helper</td>
-                                        <td>manage</td>
-                                    </tr>
-                                </thead>";
                     while ($row = $result->fetch_assoc()) {
                             echo "
                                 <tr>
@@ -55,11 +54,9 @@
                                     </td>
                                 </tr>";
                     }
-                    echo "</table>";
                 }
             ?>
         </table>
-        
     </div>
     </body>
 
@@ -172,6 +169,6 @@
 
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>

@@ -20,15 +20,28 @@
 <?php
     require_once("../components/navBar.html");
 ?>
-<?php
-    require_once("../components/main_table.html");
-?>
     <div id="wrap">
         <span class="system"></span>
         <div id="manipulate_display"></div>
         <div id="show_add_instance">
         </div>
+
         <iframe name="dummyframe" style="display:none;"></iframe>
+        <table class='styled-table'>
+            <caption class='cap'>service role management</caption>
+            <thead>
+                <tr>
+                    <td>role</td>
+                    <td>manage</td>
+                    <td>groups
+                    <td>add group</td>
+                    <td>del group</td>
+                    <td>helpers
+                    <td>add helper</td>
+                    <td>del helper</td>
+                </tr>
+            </thead>
+
             <?php
                 // different
                 $table = "service_role"; 
@@ -39,21 +52,6 @@
                 }
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    echo "<table class='styled-table'>
-                                <caption style='text-transform: capitalize;'>service role management</caption>
-                                <thead>
-                                    <tr>
-                                        <td>role</td>
-                                        <td>manage</td>
-                                        <td>groups
-                                        <td>add group</td>
-                                        <td>remove group</td>
-                                        <td>helpers
-                                        <td>add helper</td>
-                                        <td>remove helper</td>
-                                    </tr>
-                                </thead>
-                        ";
                     while ($row = $result->fetch_assoc()) {
                         //Groups
                         $sql2 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = ".$row['id'];
@@ -99,7 +97,7 @@
                                         
                                     </td>
                                 ";
-                                // remove group
+                                // del group
                                 echo "
                                 <td>
                                         <form action='../controller/ConRemoveGroupToRole.php' target='dummyframe' method='POST'>
@@ -117,7 +115,7 @@
                                             <input type='hidden' name='role_id' value=". $row['id'] .">
                                             <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
-                                            >Remove Group</button>
+                                            >del Group</button>
                                         </form>
                                     </td>";
 
@@ -161,7 +159,7 @@
                                                 </td>
                                             ";
                                                 
-                                            // remove helper
+                                            // del helper
                                             echo "
                                             <td>
                                                     <form action='../controller/ConRemoveHelperToRole.php' target='dummyframe' method='POST'>
@@ -179,19 +177,15 @@
                                                         <input type='hidden' name='role_id' value=". $row['id'] .">
                                                         <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
-                                                        >Remove Helper</button>
+                                                        >del Helper</button>
                                                     </form>
-                                                </td>";       
-                                                
+                                                </td>";
 //helpers end
-                                            
                                 echo "</tr>";
                     }
-                    echo "</table>";
                 }
             ?>
         </table>
-        
     </div>
     </body>
 
@@ -295,7 +289,7 @@
 </script>
 <!-- put at end -->
 <script>
-    $("button").addClass("button-8");
+    $("button").toggleClass("button-8");
     $("button").attr("role","button");
 </script>
 
