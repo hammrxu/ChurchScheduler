@@ -229,7 +229,7 @@ span.system {
   float: right;
   padding: 5px;
   font-size: 0.8rem;
-  margin-right: 7px;
+  margin-right: 2.6rem;
 }
 .navbar {
   overflow: hidden;
@@ -237,7 +237,7 @@ span.system {
 }
 .navbar a {
   float: left;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -248,7 +248,7 @@ span.system {
   overflow: hidden;
 }
 .dropdown .dropbtn {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   border: none;
   outline: none;
   color: white;

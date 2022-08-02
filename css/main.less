@@ -10,6 +10,7 @@
 @add-remove-button-select-w: 120px;
 @delete-rename-button-select-w:80px;
 @fix-button-h:30px;
+@nav-font-size:(@base-font-size - 0.3 );
 body{
     display:flex;
     flex-direction: column;
@@ -277,7 +278,7 @@ height:@fix-button-h;
         float:right;
         padding:5px;
         font-size: @base-font-size - 0.8;
-        margin-right: 7px;
+        margin-right: @nav-font-size * 2 ;
     }
 }
 .navbar {
@@ -287,7 +288,7 @@ height:@fix-button-h;
   
   .navbar a {
     float: left;
-    font-size: @base-font-size;
+    font-size: @nav-font-size;
     color: white;
     text-align: center;
     padding: 14px 16px;
@@ -300,7 +301,7 @@ height:@fix-button-h;
   }
   
   .dropdown .dropbtn {
-    font-size: @base-font-size;  
+    font-size: @nav-font-size;  
     border: none;
     outline: none;
     color: white;
