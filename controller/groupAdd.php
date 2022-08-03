@@ -8,7 +8,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $sql = "insert into service_group (tname) values('".$query_filed."')";
+    $sql = "insert into service_group (tname,last_edit) values('".$query_filed."',NOW())";
 
     $result = $conn->query($sql);
 ?>

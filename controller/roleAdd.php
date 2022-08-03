@@ -10,7 +10,7 @@
 
     // Set the DELETE SQL data
     
-    $sql = "insert into service_role (tname) values('".$query_filed."')";
+    $sql = "insert into service_role (tname,last_edit) values('".$query_filed."',NOW())";
     // echo $sql;
     $result = $conn->query($sql);
 

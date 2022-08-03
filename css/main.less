@@ -11,6 +11,8 @@
 @delete-rename-button-select-w:80px;
 @fix-button-h:30px;
 @nav-font-size:(@base-font-size - 0.3 );
+@add-form-font-s:(@base-font-size - 0.4 );
+@memo-font-s: @fz-table-content - 0.3;
 body{
     display:flex;
     flex-direction: column;
@@ -61,7 +63,9 @@ body{
     border-bottom:1px #FB8122 solid;
 }
 
-
+#memo{
+    font-size:@memo-font-s;
+}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -184,6 +188,7 @@ form.add-form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: @add-form-font-s;
 
     group{
         display: flex;

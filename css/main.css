@@ -48,6 +48,9 @@ h2 {
   padding: 15px 0px;
   border-bottom: 1px #FB8122 solid;
 }
+#memo {
+  font-size: 1rem;
+}
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -144,6 +147,7 @@ form.add-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 1.2rem;
 }
 form.add-form group {
   display: flex;

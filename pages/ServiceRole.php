@@ -27,6 +27,9 @@
         </div>
 
         <iframe name="dummyframe" style="display:none;"></iframe>
+        <pre id="memo">
+*Each role at a time can be assign by ONE GROUP or ONE HELPER.
+If two persons, make them form a group/team at page <a href='../pages/ServiceGroup.php' style='color:orange' >Manage Service Group</a></pre>
         <table class='styled-table'>
             <caption class='cap'>service role management</caption>
             <thead>

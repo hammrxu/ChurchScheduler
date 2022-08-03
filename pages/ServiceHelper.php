@@ -97,8 +97,8 @@
             //TODO：用email自动发送一个感谢注册的页面
             $('#add-submit').on("click", function() {
                 setTimeout(function() {
-                    // location.reload();
-                }, 1500);
+                    location.reload();
+                }, 500);
                 $('#manipulate_display').text("submited, refreshing soon");
             })
     });
