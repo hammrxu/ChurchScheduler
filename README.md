@@ -1,6 +1,7 @@
 # :sweat_drops:Church Scheduler
 
-### :droplet: [Try it](http://church-scheduler.lovestoblog.com/)
+### :droplet: Try it
+http://church-scheduler.lovestoblog.com/
 
 ### :droplet:Demostration
 Church Scheduler [YouTube Video Demo](https://youtu.be/tbp23RgwusE)
