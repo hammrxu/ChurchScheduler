@@ -11,6 +11,7 @@
     <title>Church Scheduler</title>
     <link href="../css/main.css" rel="stylesheet">
     <link href="../css/Scheduling.css" rel="stylesheet">
+    <link href="../css/nav.css" rel="stylesheet">
     
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>

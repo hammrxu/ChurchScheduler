@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Scheduler</title>
     <link href="../css/main.css" rel="stylesheet">
+    <link href="../css/nav.css" rel="stylesheet">
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../components/add_form.js"></script>
