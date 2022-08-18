@@ -3,6 +3,24 @@ table td {
   height: 100px;
   user-select: none;
 }
+table td .cellcontent-active {
+  display: none;
+}
+table td .destination-active {
+  padding: 10px;
+  border: 1px solid orange;
+  position: relative;
+  cursor: pointer;
+}
+table td .destination-active:hover .fa {
+  display: block;
+}
+table td .fa {
+  position: absolute;
+  display: none;
+  top: 0px;
+  right: 0px;
+}
 select {
   padding: 7px;
   margin: 5px;

@@ -17,6 +17,11 @@
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../components/add_form.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <style>
+    
+   
+    </style>
 </head>
 
 <body>
@@ -84,11 +89,11 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
                         // 3 start
                         //select helper
                         echo "<td class='wrapper'>";
-                                
+                        echo"<div class='cellcontent'>";
                                 $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result3 = $conn->query($sql3);
                                 echo"<label>Helper</label>";
-                                echo "<select name= role class='helper_select' onchange='func(row$index,this.value);'><option></option>";
+                                echo "<select name= role class='helper_select' ><option disabled selected></option>";//onchange='func(row$index,this.value);'
                                 if ($result3->num_rows > 0) {
                                     while($row3 = mysqli_fetch_assoc($result3)){
                                                 echo "<option value='".$row3['id']."'>".$row3['tname']."</option>";
@@ -102,13 +107,16 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
                                 $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" .$role_id_list[$i].")" ;
                                 $result4 = $conn->query($sql4);
                                 echo"<label>Group</label>";
-                                echo "<select name= group><option></option>";
+                                echo "<select name= group class='group_select'><option disabled selected></option>";
                                 if ($result4->num_rows > 0) {
                                     while($row4 = mysqli_fetch_assoc($result4)){
                                                 echo "<option value='".$row4['id']."'>".$row4['tname']."</option>";
                                     }
                                 }
-                        echo "</select></td>";
+                        echo "</select>";
+                        echo "</div>";
+                        echo "<span class='destination'></span>";
+                        echo "</td>";
 
 
                     }
@@ -147,6 +155,41 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
         return days;
     }
 
+    
+    function selectTrigger(){
+        $('.helper_select').change(function(e){
+            showSelectedHideSelection(e);
+        });
+        $('.group_select').change(function(e){
+            showSelectedHideSelection(e);
+        });
+        
+        function showSelectedHideSelection(e){
+            //clear
+            x = e.target
+            $(e.target.parentElement).toggleClass('cellcontent-active');
+            $(e.target.parentElement).next().html("");
+            $(e.target.parentElement).next().toggleClass('destination-active');
+            $(e.target.parentElement).next().html(x.options[x.selectedIndex].text+'<i class="fa fa-times" aria-hidden="true"></i>');
+            //remove item and show select again
+            $('.fa-times').click(function(){
+                console.log(e.target.parentElement);
+                // $(e.target.parentElement).prev().toggleClass('cellcontent-active');
+                // $(e.target.parentElement).toggleClass('destination-active');
+                // $(e.target.parentElement).empty();
+                $(e.target.parentElement).toggleClass('cellcontent-active');
+                $(e.target.parentElement).next().toggleClass('destination-active');
+                $(e.target.parentElement).next().empty();
+                //reset select to default
+                var options = e.target.options;
+                console.log(options);
+                for (var i = 0, l = options.length; i < l; i++) {
+                    options[i].selected = options[i].defaultSelected;
+                }
+            });
+        }
+    }
+    selectTrigger();
 
     function getLaterOffDays(list,day3){
         let day = new Date();
