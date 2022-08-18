@@ -37,7 +37,8 @@
     ?>
     <iframe name="dummyframe" style="display:none;"></iframe>
     <?php 
-            if(isset($_POST['custom'])) {
+        //custom 
+        if(isset($_POST['custom'])) {
             //empty first
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
@@ -109,88 +110,91 @@
                 mysqli_multi_query($conn, $query);
             }
             $message =  "Tables Created: ". $role_c." Roles, ".$group_c." Groups, ".$helper_c." Helpers ";
-             echo "<script type='text/javascript'>alert('$message');</script>";
+                echo "<script type='text/javascript'>alert('$message');</script>";
         }
-            
-        // ----------------------------------------
-            if(isset($_POST['reset'])) {
+        
+        //reset
+        if(isset($_POST['reset'])) {
+            //--------------------------
             //add group into table
-                $query = '';
-                // json file name
-                $filename = "../data/group.json";
-                // Read the JSON file in PHP
-                $data = file_get_contents($filename); 
-                // Convert the JSON String into PHP Array
-                $array = json_decode($data, true); 
-                // Extracting row by row
-                foreach($array as $row) {
-                    // Database query to insert data 
-                    // into database Make Multiple 
-                    // Insert Query 
-                    $query .= "INSERT INTO service_group(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
-                }
-                mysqli_multi_query($conn, $query);
-                
+            $query = '';
+            // json file name
+            $filename = "../data/group.json";
+            // Read the JSON file in PHP
+            $data = file_get_contents($filename); 
+            // Convert the JSON String into PHP Array
+            $array = json_decode($data, true); 
+            // Extracting row by row
+            foreach($array as $row) {
+                // Database query to insert data 
+                // into database Make Multiple 
+                // Insert Query 
+                $query .= "INSERT INTO service_group(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
+            }
+            // mysqli_multi_query($conn, $query);
+            
+            //--------------------------
             //add role into table
-                $query = '';
-                // json file name
-                $filename = "../data/role.json";
-                // Read the JSON file in PHP
-                $data = file_get_contents($filename); 
-                // Convert the JSON String into PHP Array
-                $array = json_decode($data, true); 
-                // Extracting row by row
-                foreach($array as $row) {
-                    // Database query to insert data 
-                    // into database Make Multiple 
-                    // Insert Query 
-                    $query .= "INSERT INTO service_role(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
-                }
-                mysqli_multi_query($conn, $query);
+            // json file name
+            $filename = "../data/role.json";
+            // Read the JSON file in PHP
+            $data = file_get_contents($filename); 
+            // Convert the JSON String into PHP Array
+            $array = json_decode($data, true); 
+            // Extracting row by row
+            foreach($array as $row) {
+                // Database query to insert data 
+                // into database Make Multiple 
+                // Insert Query 
+                $query .= "INSERT INTO service_role(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
+            }
+            // mysqli_multi_query($conn, $query);
+            
+            //--------------------------
             //add helper into table
-                $query = '';
-                // json file name
-                $filename = "../data/helper.json";
-                // Read the JSON file in PHP
-                $data = file_get_contents($filename); 
-                // Convert the JSON String into PHP Array
-                $array = json_decode($data, true); 
-                // Extracting row by row
-                foreach($array as $row) {
-                    // Database query to insert data 
-                    // into database Make Multiple 
-                    // Insert Query 
-                    $query .= "INSERT INTO service_helper(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
-                }
-                mysqli_multi_query($conn, $query);
-
-                $message = "Tables Now Reset";
-                echo "<script type='text/javascript'>alert('$message');</script>";
+            // json file name
+            $filename = "../data/helper.json";
+            // Read the JSON file in PHP
+            $data = file_get_contents($filename); 
+            // Convert the JSON String into PHP Array
+            $array = json_decode($data, true); 
+            // Extracting row by row
+            foreach($array as $row) {
+                // Database query to insert data 
+                // into database Make Multiple 
+                // Insert Query 
+                $query .= "INSERT INTO service_helper(id,tname) VALUES ('".$row["id"]."','".$row["tname"]."'); "; 
             }
-            //empty  
-            if(isset($_POST['empty'])) {
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-                $sql = '';
-                $sql .= "DELETE FROM ct_role_group WHERE role_id_fk between 0 and 200; ";
-                $sql .= "DELETE FROM ct_group_helper WHERE group_id_fk between 0 and 200; ";
-                $sql .= "DELETE FROM ct_role_helper  WHERE role_id_fk between 0 and 200; ";
-                $sql .= "DELETE FROM service_group WHERE id between 0 and 200; ";
-                $sql .= "DELETE FROM service_role WHERE id between 0 and 200; ";
-                $sql .= "DELETE FROM service_helper WHERE id between 0 and 200; ";
-                // reset all tables increment from 1
-                $sql .= "ALTER TABLE ct_role_group AUTO_INCREMENT = 1; ";
-                $sql .= "ALTER TABLE ct_group_helper AUTO_INCREMENT = 1; ";
-                $sql .= "ALTER TABLE ct_role_helper AUTO_INCREMENT = 1; ";
-                $sql .= "ALTER TABLE service_group AUTO_INCREMENT = 1; ";
-                $sql .= "ALTER TABLE service_role AUTO_INCREMENT = 1; ";
-                $sql .= "ALTER TABLE service_helper AUTO_INCREMENT = 1; ";
-                $result = mysqli_multi_query($conn, $sql);
+            mysqli_multi_query($conn, $query);
 
-                $message = "Tables Now Empty";
-                echo "<script type='text/javascript'>alert('$message');</script>";
+            $message = "Tables Now Reset";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+
+        //empty  
+        if(isset($_POST['empty'])) {
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
             }
+            $sql = '';
+            $sql .= "DELETE FROM ct_role_group WHERE role_id_fk between 0 and 200; ";
+            $sql .= "DELETE FROM ct_group_helper WHERE group_id_fk between 0 and 200; ";
+            $sql .= "DELETE FROM ct_role_helper  WHERE role_id_fk between 0 and 200; ";
+            $sql .= "DELETE FROM service_group WHERE id between 0 and 200; ";
+            $sql .= "DELETE FROM service_role WHERE id between 0 and 200; ";
+            $sql .= "DELETE FROM service_helper WHERE id between 0 and 200; ";
+            // reset all tables increment from 1
+            $sql .= "ALTER TABLE ct_role_group AUTO_INCREMENT = 1; ";
+            $sql .= "ALTER TABLE ct_group_helper AUTO_INCREMENT = 1; ";
+            $sql .= "ALTER TABLE ct_role_helper AUTO_INCREMENT = 1; ";
+            $sql .= "ALTER TABLE service_group AUTO_INCREMENT = 1; ";
+            $sql .= "ALTER TABLE service_role AUTO_INCREMENT = 1; ";
+            $sql .= "ALTER TABLE service_helper AUTO_INCREMENT = 1; ";
+            $result = mysqli_multi_query($conn, $sql);
+
+            $message = "Tables Now Empty";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
 
         ?>
     <form method="post">
