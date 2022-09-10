@@ -1,30 +1,13 @@
-<!-- db connection start-->
 <?php
-include_once'../Config/db.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Scheduler</title>
-    <link href="../css/main.css" rel="stylesheet">
-
-    </style>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-
-</head>
-<body>
-<?php
-    require_once("../components/navBar.html");
-?>
-<?php
-    require_once "../components/main_table.html";
+$title = "Church Scheduler";
+$fileName = "index";
+include_once "header.php";
 ?>
 
 
-
+<?php
+require_once "../components/main_table.html";
+?>
 <!-- TODO: 默认显示发布好的未来6个月的日期文字表，以及日期表上的服侍同工 -->
 <div>Defalt will show Coming 6-Months schedule for all</div>
 
@@ -34,9 +17,9 @@ include_once'../Config/db.php';
 <br><br>
 <br>
 <div>Please Choose</div>
- <select name="schedules" id="schedule_select_list">
+<select name="schedules" id="schedule_select_list">
     <option value="coming" selected>Coming 6-Months</option>
-    <option value="past" >Past 6-Months</option>
+    <option value="past">Past 6-Months</option>
 </select>
 
 <br><br><br>
@@ -362,65 +345,6 @@ Coming 6-Months
     </tbody>
 
 </table>
-
-<!-- show all table names in database table:customers -->
 <?php
-    // $table = "customers";
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
-
-    // $sql = "SELECT * FROM $table";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     echo "<table class='sample_table' BORDER>";
-    //         echo "<th>customerNumber</th>";
-    //         echo "<th>customerName</th>";
-    //         echo "<th>phone</th>";
-    //         echo "<th>addressLine1</th>";
-    //         echo "<th>addressLine2</th>";
-    //         echo "<th>state</th>";
-    //         echo "<th>postalCode</th>";
-    //         echo "<th>country</th>";
-    //         echo "<th>city</th>";
-    //         echo "<th>salesRepEmployeeNumber</th>";
-    //         echo "<th>creditLimit</th>";
-    //     while ($row = $result->fetch_assoc()) {
-    //         echo "<tr><td>" . $row["customerNumber"] .
-    //         "</td><td>" . $row["customerName"] .
-    //         "</td><td>" . $row["phone"] .
-    //         "</td><td>" . $row["addressLine1"] .
-    //         "</td><td>" . $row["addressLine2"] .
-    //         "</td><td>" . $row["state"] .
-    //         "</td><td>" . $row["postalCode"] .
-    //         "</td><td>" . $row["country"] .
-    //         "</td><td>" . $row["city"] .
-    //         "</td><td>" . $row["salesRepEmployeeNumber"] .
-    //         "</td><td>" . $row["creditLimit"] .
-    //             "</td></tr>";
-    //     }
-    //     echo "</table>";
-    // } else {
-    //     echo "0 result";
-    //     $_POST = array();
-    // }
+include_once "footer.php";
 ?>
-
-<!-- db connection close-->
-<?php
-    $conn->close();
-?>
-</body>
-
-<script src="../js/main.js"></script>
-<script>
-let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-date = new Date().toLocaleDateString("en-US", options);
-document.getElementById("current_date").innerHTML = date;
-</script>
-
-<script>
-    $("button").toggleClass("button-8");
-    $("button").attr("role","button");
-</script>
-</html>

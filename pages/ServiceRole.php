@@ -1,95 +1,84 @@
-<!-- db connection start-->
 <?php
-    require_once "../Config/db.php"
+$title = "Manage Role | Church Scheduler";
+$fileName = "ServiceRole";
+include_once "header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Scheduler</title>
-    <link href="../css/main.css" rel="stylesheet">
+<script src="../components/add_form.js"></script>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../components/add_form.js"></script>
-</head>
-
-<body>
 <?php
-    require_once("../components/navBar.html");
+require_once("../components/navBar.php");
 ?>
-    <div id="wrap">
-        <span class="system"></span>
-        <div id="manipulate_display"></div>
-        <div id="show_add_instance">
-        </div>
+<div id="wrap">
+    <span class="system"></span>
+    <div id="manipulate_display"></div>
+    <div id="show_add_instance">
+    </div>
 
-        <iframe name="dummyframe" style="display:none;"></iframe>
-        <table class='styled-table'>
-            <caption class='cap'>service role management</caption>
-            <thead>
-                <tr>
-                    <td>role</td>
-                    <td>manage</td>
-                    <td>groups
-                    <td>add group</td>
-                    <td>del group</td>
-                    <td>helpers
-                    <td>add helper</td>
-                    <td>del helper</td>
-                </tr>
-            </thead>
+    <iframe name="dummyframe" style="display:none;"></iframe>
+    <table class='styled-table'>
+        <caption class='cap'>service role management</caption>
+        <thead>
+            <tr>
+                <td>role</td>
+                <td>manage</td>
+                <td>groups
+                <td>add group</td>
+                <td>del group</td>
+                <td>helpers
+                <td>add helper</td>
+                <td>del helper</td>
+            </tr>
+        </thead>
 
-            <?php
-                // different
-                $table = "service_role"; 
-                $sql = "SELECT id,tname FROM {$table} order by tname ASC"; 
-                
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+        <?php
+        // different
+        $table = "service_role";
+        $sql = "SELECT id,tname FROM {$table} order by tname ASC";
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                //Groups
+                $sql2 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = " . $row['id'];
+                $result2 = $conn->query($sql2);
+                $nameList = '';
+                if ($result2->num_rows > 0) {
+                    while ($row2 = $result2->fetch_assoc()) {
+                        $nameList .= $row2['hname'];
+                        $nameList .= ", ";
+                    }
+                    $nameList = substr($nameList, 0, -2);
                 }
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        //Groups
-                        $sql2 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = ".$row['id'];
-                        $result2 = $conn->query($sql2);
-                        $nameList='';
-                        if ($result2->num_rows > 0) {
-                            while ($row2 = $result2->fetch_assoc()) {
-                                $nameList.=$row2['hname'];
-                                $nameList.=", ";
-                            }
-                            $nameList = substr($nameList, 0, -2);
-                        }
-                            echo "
+                echo "
                                 <tr>
-                                    <td value=". $row['id'] . ">" . $row['tname'] . "</td>
+                                    <td value=" . $row['id'] . ">" . $row['tname'] . "</td>
                                     <td>
                                         <button class='delete_instance cap fixed-button'>delete</button>
                                         <button class='edit_instance_name cap fixed-button'>rename</button>
                                     </td>";
-                                    //show groups
-                            echo "<td>".$nameList."</td>";
-                            //add group
-                            echo "
+                //show groups
+                echo "<td>" . $nameList . "</td>";
+                //add group
+                echo "
                                     <td>
                                         <form action='../controller/ConAddGroupToRole.php' target='dummyframe' method='POST'>
                                             <select name='group_id' id='cars'>
                                 ";
-                                
-                                            $sql3 = "SELECT tname, id FROM service_group WHERE service_group.id NOT IN (SELECT ct_role_group.group_id_fk FROM ct_role_group where role_id_fk = ".$row['id'].")";
-                                            $result3 = $conn->query($sql3);
-                                            if ($result3->num_rows > 0) {
-                                                echo " <option disabled selected value> </option>";
-                                                while ($row3 = $result3->fetch_assoc()) {
-                                                    echo "<option value = ".$row3['id'].">".$row3['tname']."</option>";
-                                                }
-                                            }        
-                                echo "</select>
-                                            <input type='hidden' name='role_id' value=". $row['id'] .">
+
+                $sql3 = "SELECT tname, id FROM service_group WHERE service_group.id NOT IN (SELECT ct_role_group.group_id_fk FROM ct_role_group where role_id_fk = " . $row['id'] . ")";
+                $result3 = $conn->query($sql3);
+                if ($result3->num_rows > 0) {
+                    echo " <option disabled selected value> </option>";
+                    while ($row3 = $result3->fetch_assoc()) {
+                        echo "<option value = " . $row3['id'] . ">" . $row3['tname'] . "</option>";
+                    }
+                }
+                echo "</select>
+                                            <input type='hidden' name='role_id' value=" . $row['id'] . ">
                                             <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
                                             >Add Group </button>
@@ -97,22 +86,22 @@
                                         
                                     </td>
                                 ";
-                                // del group
-                                echo "
+                // del group
+                echo "
                                 <td>
                                         <form action='../controller/ConRemoveGroupToRole.php' target='dummyframe' method='POST'>
                                             <select name='group_id' id='cars'>
                                 ";
-                                            $sql5 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = ".$row['id'];
-                                            $result5 = $conn->query($sql5);
-                                            if ($result5->num_rows > 0) {
-                                                echo " <option disabled selected value> </option>";
-                                                while ($row5 = $result5->fetch_assoc()) {
-                                                    echo "<option value = ".$row5['group_id_fk'].">".$row5['hname']."</option>";
-                                                }
-                                            }        
-                                echo "</select>
-                                            <input type='hidden' name='role_id' value=". $row['id'] .">
+                $sql5 = "SELECT service_role.id,service_role.tname,ct_role_group.group_id_fk,service_group.tname as hname FROM service_role LEFT JOIN ct_role_group ON ct_role_group.role_id_fk = service_role.id LEFT JOIN service_group ON ct_role_group.group_id_fk = service_group.id where service_role.id = " . $row['id'];
+                $result5 = $conn->query($sql5);
+                if ($result5->num_rows > 0) {
+                    echo " <option disabled selected value> </option>";
+                    while ($row5 = $result5->fetch_assoc()) {
+                        echo "<option value = " . $row5['group_id_fk'] . ">" . $row5['hname'] . "</option>";
+                    }
+                }
+                echo "</select>
+                                            <input type='hidden' name='role_id' value=" . $row['id'] . ">
                                             <button type='submit' class='connect cap fixed-button2' 
                                             onclick='setTimeout(function() {location.reload();}, 100);'
                                             >del Group</button>
@@ -122,35 +111,35 @@
 
 
 
-// helpers start
-                                    $sql7 = "SELECT service_role.id,service_role.tname,ct_role_helper.helper_id_fk,service_helper.tname as hname FROM service_role LEFT JOIN ct_role_helper ON ct_role_helper.role_id_fk = service_role.id LEFT JOIN service_helper ON ct_role_helper.helper_id_fk = service_helper.id where service_role.id = ".$row['id'];
-                                    $result7 = $conn->query($sql7);
-                                    $nameList='';
-                                    if ($result7->num_rows > 0) {
-                                        while ($row7 = $result7->fetch_assoc()) {
-                                            $nameList.=$row7['hname'];
-                                            $nameList.=", ";
-                                        }
-                                        $nameList = substr($nameList, 0, -2);
-                                    }
-                                                //show helpers
-                                        echo "<td>".$nameList."</td>";
-                                        //add helper
-                                        echo "
+                // helpers start
+                $sql7 = "SELECT service_role.id,service_role.tname,ct_role_helper.helper_id_fk,service_helper.tname as hname FROM service_role LEFT JOIN ct_role_helper ON ct_role_helper.role_id_fk = service_role.id LEFT JOIN service_helper ON ct_role_helper.helper_id_fk = service_helper.id where service_role.id = " . $row['id'];
+                $result7 = $conn->query($sql7);
+                $nameList = '';
+                if ($result7->num_rows > 0) {
+                    while ($row7 = $result7->fetch_assoc()) {
+                        $nameList .= $row7['hname'];
+                        $nameList .= ", ";
+                    }
+                    $nameList = substr($nameList, 0, -2);
+                }
+                //show helpers
+                echo "<td>" . $nameList . "</td>";
+                //add helper
+                echo "
                                                 <td>
                                                     <form action='../controller/ConAddHelperToRole.php' target='dummyframe' method='POST'>
                                                         <select name='helper_id' id='cars'>
                                             ";
-                                                        $sql8 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_role_helper.helper_id_fk FROM ct_role_helper where role_id_fk = ".$row['id'].")";
-                                                        $result8 = $conn->query($sql8);
-                                                        if ($result8->num_rows > 0) {
-                                                            echo " <option disabled selected value> </option>";
-                                                            while ($row8 = $result8->fetch_assoc()) {
-                                                                echo "<option value = ".$row8['id'].">".$row8['tname']."</option>";
-                                                            }
-                                                        }        
-                                            echo "</select>
-                                                        <input type='hidden' name='role_id' value=". $row['id'] .">
+                $sql8 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_role_helper.helper_id_fk FROM ct_role_helper where role_id_fk = " . $row['id'] . ")";
+                $result8 = $conn->query($sql8);
+                if ($result8->num_rows > 0) {
+                    echo " <option disabled selected value> </option>";
+                    while ($row8 = $result8->fetch_assoc()) {
+                        echo "<option value = " . $row8['id'] . ">" . $row8['tname'] . "</option>";
+                    }
+                }
+                echo "</select>
+                                                        <input type='hidden' name='role_id' value=" . $row['id'] . ">
                                                         <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
                                                         >Add Helper</button>
@@ -158,38 +147,35 @@
                                                     
                                                 </td>
                                             ";
-                                                
-                                            // del helper
-                                            echo "
+
+                // del helper
+                echo "
                                             <td>
                                                     <form action='../controller/ConRemoveHelperToRole.php' target='dummyframe' method='POST'>
                                                         <select name='helper_id' id='cars'>
                                             ";
-                                                        $sql9 = "SELECT service_role.id,service_role.tname,ct_role_helper.helper_id_fk,service_helper.tname as hname FROM service_role LEFT JOIN ct_role_helper ON ct_role_helper.role_id_fk = service_role.id LEFT JOIN service_helper ON ct_role_helper.helper_id_fk = service_helper.id where service_role.id = ".$row['id'];
-                                                        $result9 = $conn->query($sql9);
-                                                        if ($result9->num_rows > 0) {
-                                                            echo " <option disabled selected value> </option>";
-                                                            while ($row9 = $result9->fetch_assoc()) {
-                                                                echo "<option value = ".$row9['helper_id_fk'].">".$row9['hname']."</option>";
-                                                            }
-                                                        }        
-                                            echo "</select>
-                                                        <input type='hidden' name='role_id' value=". $row['id'] .">
+                $sql9 = "SELECT service_role.id,service_role.tname,ct_role_helper.helper_id_fk,service_helper.tname as hname FROM service_role LEFT JOIN ct_role_helper ON ct_role_helper.role_id_fk = service_role.id LEFT JOIN service_helper ON ct_role_helper.helper_id_fk = service_helper.id where service_role.id = " . $row['id'];
+                $result9 = $conn->query($sql9);
+                if ($result9->num_rows > 0) {
+                    echo " <option disabled selected value> </option>";
+                    while ($row9 = $result9->fetch_assoc()) {
+                        echo "<option value = " . $row9['helper_id_fk'] . ">" . $row9['hname'] . "</option>";
+                    }
+                }
+                echo "</select>
+                                                        <input type='hidden' name='role_id' value=" . $row['id'] . ">
                                                         <button type='submit' class='connect cap fixed-button2' 
                                                         onclick='setTimeout(function() {location.reload();}, 100);'
                                                         >del Helper</button>
                                                     </form>
                                                 </td>";
-//helpers end
-                                echo "</tr>";
-                    }
-                }
-            ?>
-        </table>
-    </div>
-    </body>
-
-<script src="../js/main.js"></script>
+                //helpers end
+                echo "</tr>";
+            }
+        }
+        ?>
+    </table>
+</div>
 <script>
     //equiv buttons real role name   ==>  $(this).parent().prev().html() 
     //id   =>>    $(this).parent().prev().attr("value");
@@ -201,11 +187,11 @@
                 let id = $(this).parent().prev().attr("value"); //get the id
 
                 $.ajax({
-                    type: "POST", 
+                    type: "POST",
                     url: '../controller/roleDelete.php', // get the route value
                     data: {
                         id: id
-                    }, 
+                    },
                     beforeSend: function() { //We add this before send to disable the button once we submit it so that we prevent the multiple click
 
                     },
@@ -225,10 +211,10 @@
     //add role
     $("#show_add_instance").append(add_form_role);
     $(".add-form").on("submit", function() {
-        if($("#var_inp").val() == ""){
+        if ($("#var_inp").val() == "") {
             event.preventDefault();
             alert("empty name! plz enter again");
-        }else{
+        } else {
             alert("submited");
             console.log("submitted");
             setTimeout(function() {
@@ -236,7 +222,7 @@
             }, 500);
             $('#manipulate_display').text("submited, refreshing soon");
         }
-       
+
     })
 
     // edit_role_name
@@ -277,19 +263,17 @@
     });
 
     //reload page
-    function reloads(c){
+    function reloads(c) {
         setTimeout(function() {
-                    location.reload();
-                }, c);
+            location.reload();
+        }, c);
         $('#manipulate_display').text("submited, refreshing soon");
 
     }
-
-    
-</script>
-<!-- put at end -->
-<script>
-    $("button").toggleClass("button-8");
-    $("button").attr("role","button");
 </script>
 
+
+
+<?php
+include_once "footer.php";
+?>

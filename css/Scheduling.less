@@ -1,12 +1,51 @@
+form{
+    position:relative;
+}
 table td{
     border:1px solid rgb(214, 190, 189);
     height: 100px;
     user-select: none;
+
+    .cellcontent-active{
+        display:none;
+    }
+
+    .destination-active{
+        padding:10px;
+        // border:1px solid orange;
+        background-color:#54C1F0 ;
+        border-radius: 5px;
+        position: relative;
+        cursor:pointer;
+        &:hover .fa{
+            display:block;
+        }
+    }
+    
+    .fa{
+        position:absolute;
+        display:none;
+        top:0px;
+        right:0px;
+        color:#fdc199;
+    }
+
+
+    
+    
+
+
 }
 select{
     padding:7px;
     margin:5px;
 }
 
+
+#submit{
+    position:absolute;
+    top:90px;
+    right:0px;
+}
 
 
