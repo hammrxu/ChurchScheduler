@@ -7,18 +7,19 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	font-family: 'Ubuntu', sans-serif;
 	box-sizing: border-box;
-	text-decoration: none;
 }
 
 body {
 	background: #e8edf5;
 	width: 100%;
 	height: 100%;
-	color: black !important;
 }
 
+.main_body {
+	font-family: 'Ubuntu', sans-serif;
+	text-decoration: none;
+}
 .main_body .sidebar_menu {
 	position: fixed;
 	top: 44px;
