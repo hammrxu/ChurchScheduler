@@ -1,3 +1,6 @@
+form {
+  position: relative;
+}
 table td {
   border: 1px solid #d6bebd;
   height: 100px;
@@ -8,7 +11,8 @@ table td .cellcontent-active {
 }
 table td .destination-active {
   padding: 10px;
-  border: 1px solid orange;
+  background-color: #54C1F0;
+  border-radius: 5px;
   position: relative;
   cursor: pointer;
 }
@@ -20,8 +24,14 @@ table td .fa {
   display: none;
   top: 0px;
   right: 0px;
+  color: #fdc199;
 }
 select {
   padding: 7px;
   margin: 5px;
+}
+#submit {
+  position: absolute;
+  top: 90px;
+  right: 0px;
 }

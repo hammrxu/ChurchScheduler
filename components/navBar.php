@@ -26,5 +26,30 @@
         <a href="../pages/DemoData.php">DemoData</a>
         <a href="../pages/APIs.php">APIs</a>
     </div>
+    <style>
+        .nav-log:hover {
+            background-color: lightcoral;
+            padding: 2px;
+            border-radius: 5px;
+        }
+    </style>
+
+    <?php
+    session_start();
+    if (isset($_SESSION['username'])) {
+        echo '<div id="nav-login" class="nav-log"><a href="../pages/login/profile.php" style="color:white;cursor:pointer;">Hi,' . $_SESSION['username'] . '</a></div>';
+    } else {
+        echo '<div id="nav-login" class="nav-log"><a href="../pages/login/login.php" style="color:white;cursor:pointer;">Login/SignUp</a></div>';
+    }
+    ?>
+
+
+
+    <?php
+    if (isset($_SESSION['username'])) {
+        echo '<div id="nav-logout" class="nav-log"><a href=../pages/logout/logout.php style="color:white;cursor:pointer;">
+                Log Out</a> </div>';
+    }
+    ?>
     <div id="icon-letter">Church Scheduler</div>
 </div>
