@@ -102,8 +102,9 @@ include_once "header.php";
 		</div>
 	</div>
 
-</body>
-s
-<script src="../js/APIs.js"></script>
 
-</html>
+	<script src="../js/APIs.js"></script>
+
+	<?php
+	include_once "footer.php";
+	?>
