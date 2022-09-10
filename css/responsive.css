@@ -1,0 +1,17 @@
+/* Extra small devices (phones, 600px and down) */
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+  .navbar a:nth-child(3) {
+    display: none;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and below) */
+@media only screen and (max-width: 1200px) {
+  .navbar-wrap #icon-letter {
+    display: none;
+  }
+}

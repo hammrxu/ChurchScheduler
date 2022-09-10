@@ -10,9 +10,9 @@ body {
 }
 body {
   min-width: 400px;
-  background-color: #1D2228;
+  background-color: #1d2228;
   color: #eef0f0;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 .title-table-wrap > div {
   display: flex;
@@ -23,7 +23,7 @@ body {
 .title-table-wrap > div span.t-title {
   font-weight: 600;
   text-transform: uppercase;
-  font-family: Cocoluck ;
+  font-family: Cocoluck;
 }
 .title-table-wrap > div .title-table {
   border-radius: 5px;
@@ -46,15 +46,15 @@ body {
 h1,
 h2 {
   padding: 15px 0px;
-  border-bottom: 1px #FB8122 solid;
+  border-bottom: 1px #fb8122 solid;
 }
 #memo {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-family: sans-serif;
   min-width: 300px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -66,31 +66,31 @@ h2 {
   text-align: center;
 }
 .styled-table thead td:first-child {
-  border-radius: 10px 0 0 0 ;
+  border-radius: 10px 0 0 0;
 }
 .styled-table thead td:last-child {
-  border-radius: 0 10px 0 0 ;
+  border-radius: 0 10px 0 0;
 }
 .styled-table td {
   padding: 10px 10px;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 .styled-table th td,
 .styled-table caption {
   padding: 12px 15px;
   font-weight: 600;
-  font-size: 2.548rem;
+  font-size: 2.156rem;
 }
 .styled-table thead td {
-  background-color: #FB8122;
+  background-color: #fb8122;
   text-transform: capitalize;
   font-weight: 600;
 }
 .styled-table caption {
   font-weight: 900;
   margin-bottom: 20px;
-  color: #FB8122;
+  color: #fb8122;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -141,13 +141,13 @@ td {
   width: 90vw;
 }
 form legend {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 form.add-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 form.add-form group {
   display: flex;
@@ -169,7 +169,7 @@ span.system {
 }
 /* CSS */
 .button-8 {
-  background-color: #E1E2E2;
+  background-color: #e1e2e2;
   border-radius: 3px;
   border: 1px solid #7aa7c7;
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
@@ -177,7 +177,7 @@ span.system {
   color: #265a81;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+  font-family: -apple-system, system-ui, 'Segoe UI', 'Liberation Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.15385;

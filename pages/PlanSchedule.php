@@ -38,7 +38,7 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
             echo "<table class='styled-table'>
                             <caption style='text-transform: capitalize;'>Scheduing</caption>
                             <thead>
-                                <td>Contact</td>
+                                <td></td>
                             ";
             while ($row = $result->fetch_assoc()) {
                 array_push($role_id_list, $row['id']);
@@ -75,9 +75,14 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
                         echo "<div class='cellcontent'>";
                         $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" . $role_id_list[$i] . ")";
                         $result3 = $conn->query($sql3);
-                        echo "<label>Helper</label>";
-                        // echo "<select name='".$thatSunday.'['.$role_list[$role_list_index]."]'class='helper_select' ><option disabled selected></option>";//onchange='func(row$index,this.value);'
-                        echo "<select name='helper_select' class='helper_select' ><option disabled selected></option>"; //onchange='func(row$index,this.value);'
+
+                        //select group
+                        $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" . $role_id_list[$i] . ")";
+                        $result4 = $conn->query($sql4);
+                        echo "<label></label>";
+                        echo "<select name='mix_select' class='mix_select' ><option disabled selected></option>"; //onchange='func(row$index,this.value);'
+
+                        //select helper
                         if ($result3->num_rows > 0) {
                             while ($row3 = mysqli_fetch_assoc($result3)) {
                                 echo "<option 
@@ -89,15 +94,8 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
                                     . ">" . $row3['tname'] . "</option>";
                             }
                         }
-                        echo "</select>";
-                        echo "</br>";
-                        // 3 end
-                        // 4 start
+
                         //select group
-                        $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" . $role_id_list[$i] . ")";
-                        $result4 = $conn->query($sql4);
-                        echo "<label>Group</label>";
-                        echo "<select name='group_select'class='group_select'><option disabled selected></option>";
                         if ($result4->num_rows > 0) {
                             while ($row4 = mysqli_fetch_assoc($result4)) {
                                 echo "<option 
@@ -109,6 +107,8 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
                                     . ">" . $row4['tname'] . "</option>";
                             }
                         }
+
+
                         echo "</select>";
                         echo "</div>";
                         echo "<span class='destination'></span>";
@@ -151,10 +151,7 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
 
 
     function selectTrigger() {
-        $('.helper_select').change(function(e) {
-            showSelectedHideSelection(e);
-        });
-        $('.group_select').change(function(e) {
+        $('.mix_select').change(function(e) {
             showSelectedHideSelection(e);
         });
 
@@ -169,36 +166,39 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
             destination.toggleClass('destination-active');
             destination.html(x.options[x.selectedIndex].text + '<i class="fa fa-times" aria-hidden="true"></i>' +
 
-                '<input type="hidden" value="' + selected.attr('data-date') + '">' +
+                '<input type="hidden" memo="date" value="' + selected.attr('data-date') + '">' +
                 // id
-                '<input type="hidden" value="' + selected.attr('value') + '">' +
+                '<input type="hidden" memo="id" value="' + selected.attr('value') + '">' +
                 //roleid
-                '<input type="hidden" value="' + selected.attr('data-role') + '">' +
+                '<input type="hidden" memo="roleid" value="' + selected.attr('data-role') + '">' +
                 //tname
-                '<input type="hidden" value="' + selected.attr('data-value') + '">'
+                '<input type="hidden" memo="tname" value="' + selected.attr('data-value') + '">'
             );
+            console.log("block shown");
+
+
+            //remove item and show select again
+            $('.fa-times').click(function() {
+                console.log("x is clicked");
+                console.log(e.target.parentElement);
+                $(e.target.parentElement).toggleClass('cellcontent-active');
+                $(e.target.parentElement).next().toggleClass('destination-active');
+                $(e.target.parentElement).next().empty();
+                //reset select to default
+                var options = e.target.options;
+                console.log(options);
+                for (var i = 0, l = options.length; i < l; i++) {
+                    options[i].selected = options[i].defaultSelected;
+                }
+            });
         }
 
 
 
 
 
-        //remove item and show select again
-        $('.fa-times').click(function() {
-            console.log(e.target.parentElement);
-            // $(e.target.parentElement).prev().toggleClass('cellcontent-active');
-            // $(e.target.parentElement).toggleClass('destination-active');
-            // $(e.target.parentElement).empty();
-            $(e.target.parentElement).toggleClass('cellcontent-active');
-            $(e.target.parentElement).next().toggleClass('destination-active');
-            $(e.target.parentElement).next().empty();
-            //reset select to default
-            var options = e.target.options;
-            console.log(options);
-            for (var i = 0, l = options.length; i < l; i++) {
-                options[i].selected = options[i].defaultSelected;
-            }
-        });
+
+
     }
     // }
     selectTrigger();

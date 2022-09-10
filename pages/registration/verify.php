@@ -17,7 +17,7 @@ if (isset($_GET['vkey'])) {
 
             echo "Directing to log in page";
 
-            
+
             ob_start();
             session_start();
 
@@ -35,6 +35,7 @@ if (isset($_GET['vkey'])) {
 
             // move to logged in pages
             header('location:../index.php');
+            echo '<script>alert(' . $data['u_username'] . '"Welcome!")</script>';
             die;
         } else {
             echo $conn->error;
