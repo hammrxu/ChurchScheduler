@@ -13,19 +13,29 @@ if (isset($_GET['vkey'])) {
         $update = $conn->query("UPDATE users SET verified =1 where vkey ='$vkey' LIMIT 1");
 
         if ($update) {
-            echo "This account has been verified now. You may now login.";
+            echo "This account has been verified now. You are now logged in.";
 
-            // echo "Directing to log in page";
+            echo "Directing to log in page";
 
-            // session_start();
+            
+            ob_start();
+            session_start();
 
-            // // set sessions
-            // $_SESSION['valid'] = true;
-            // $_SESSION['timeout'] = time();
-            // $_SESSION['username'] = $u_username;
-            // // move to logged in pages
-            // header('location:../index.php');
-            // die;
+            $get_verify = $conn->query("SELECT verified,u_username From users WHERE vkey ='$vkey' LIMIT 1");
+
+            // set sessions
+            $_SESSION['valid'] = true;
+            $_SESSION['timeout'] = time();
+            if ($get_verify->num_rows > 0) {
+                $data = $get_verify->fetch_array();
+                $_SESSION['verified'] = $data['verified'];
+                $_SESSION['username'] = $data['u_username'];
+            }
+
+
+            // move to logged in pages
+            header('location:../index.php');
+            die;
         } else {
             echo $conn->error;
         }

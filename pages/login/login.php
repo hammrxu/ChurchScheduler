@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         $error = "<p>User '" . $u_username . "' does not exists, please try again with other username. Or you want to Register</p>";
     } else {
         //get password in db
-        $result_u_password = $conn->query("SELECT u_password FROM users WHERE u_username = '$u_username'");
+        $result_u_password = $conn->query("SELECT verified,u_password FROM users WHERE u_username = '$u_username'");
 
         if ($result_u_password->num_rows > 0) {
             $data = $result_u_password->fetch_array();
@@ -42,6 +42,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['valid'] = true;
                 $_SESSION['timeout'] = time();
                 $_SESSION['username'] = $u_username;
+                $_SESSION['verified'] = $data['verified'];
                 // move to logged in pages
                 header('location:../index.php');
                 die;
