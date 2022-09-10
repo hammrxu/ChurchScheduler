@@ -102,7 +102,6 @@ include_once "header.php";
 
 </div>
 
-<script src="../js/main.js"></script>
 <script>
     //equiv buttons real group name   ==>  $(this).parent().prev().html() 
     //id   =>>    $(this).parent().prev().attr("value");

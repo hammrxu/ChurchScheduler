@@ -14,6 +14,18 @@ if (isset($_GET['vkey'])) {
 
         if ($update) {
             echo "This account has been verified now. You may now login.";
+
+            // echo "Directing to log in page";
+
+            // session_start();
+
+            // // set sessions
+            // $_SESSION['valid'] = true;
+            // $_SESSION['timeout'] = time();
+            // $_SESSION['username'] = $u_username;
+            // // move to logged in pages
+            // header('location:../index.php');
+            // die;
         } else {
             echo $conn->error;
         }
