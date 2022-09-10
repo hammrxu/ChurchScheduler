@@ -1,154 +1,132 @@
-<!-- db connection start-->
 <?php
-require_once "../Config/db.php"
+$title = "Scheduling | Church Scheduler";
+$fileName = "Scheduling";
+include_once "header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Scheduler</title>
-    <link href="../css/main.css" rel="stylesheet">
-    <link href="../css/Scheduling.css" rel="stylesheet">
-    <link href="../css/nav.css" rel="stylesheet">
+<script src="../components/add_form.js"></script>
 
-
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../components/add_form.js"></script>
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <style>
-
-
-    </style>
-</head>
-
-<body>
-    <?php
-    require_once("../components/navBar.php");
-    ?>
-    <iframe name="dummyframe" style="display:none;"></iframe>
-    <pre id="memo">
+<iframe name="dummyframe" style="display:none;"></iframe>
+<pre id="memo">
 *Each role at a time can be assign by ONE GROUP or ONE HELPER.
 If two persons, make them form a group/team at page <a href='../pages/ServiceGroup.php' style='color:orange' >Manage Service Group</a></pre>
-    </br>
+</br>
 
-    <!-- developing -->
-    <div>
-        <form action="../controller/" method="POST" target="dummyframe">
-            <label>Start Date</label><input type="date" name="start" id="start" min="2022-06-04"></input>
-            <label>End Date</label><input type="date" name="end" id="end" max="2050-06-04"></input>
-            <button onclick="alert('In Developing');"> Submit</button>
-        </form>
-    </div>
+<!-- developing -->
+<div>
+    <form action="../controller/" method="POST" target="dummyframe">
+        <label>Start Date</label><input type="date" name="start" id="start" min="2022-06-04"></input>
+        <label>End Date</label><input type="date" name="end" id="end" max="2050-06-04"></input>
+        <button onclick="alert('In Developing');"> Submit</button>
+    </form>
+</div>
 
-    <form action='../controller/scheduler/submitForm.php' target='dummyframe' method='POST'>
-        <div id="big-table-wrap">
-            <?php
-            // 1 start
-            $role_id_list = [];
-            $table = "service_role";
-            $sql = "SELECT id,tname FROM {$table} order by tname ASC";
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $result = $conn->query($sql);
-            $row_counts = 0;
-            $role_list = [];
-            if ($result->num_rows > 0) {
-                echo "<table class='styled-table'>
+<form action='../controller/scheduler/submitForm.php' target='dummyframe' method='POST'>
+    <div id="big-table-wrap">
+        <?php
+        // 1 start
+        $role_id_list = [];
+        $table = "service_role";
+        $sql = "SELECT id,tname FROM {$table} order by tname ASC";
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $result = $conn->query($sql);
+        $row_counts = 0;
+        $role_list = [];
+        if ($result->num_rows > 0) {
+            echo "<table class='styled-table'>
                             <caption style='text-transform: capitalize;'>Scheduing</caption>
                             <thead>
                                 <td>Contact</td>
                             ";
-                while ($row = $result->fetch_assoc()) {
-                    array_push($role_id_list, $row['id']);
-                    array_push($role_list, $row['tname']);
-                    echo "
+            while ($row = $result->fetch_assoc()) {
+                array_push($role_id_list, $row['id']);
+                array_push($role_list, $row['tname']);
+                echo "
                                 <td value=" . $row['id'] . ">" . $row["tname"] . "</td>
                             ";
-                    $row_counts++;
-                }
+                $row_counts++;
+            }
 
-                echo "</thead>";
+            echo "</thead>";
 
-                // 2 start
-                $table = "sundays";
-                $sql2 = "SELECT sunday FROM sundays where year = 2022 order by sunday ASC";
+            // 2 start
+            $table = "sundays";
+            $sql2 = "SELECT sunday FROM sundays where year = 2022 order by sunday ASC";
 
-                $result2 = $conn->query($sql2);
+            $result2 = $conn->query($sql2);
 
-                if ($result2->num_rows > 0) {
-                    $index = 1;
+            if ($result2->num_rows > 0) {
+                $index = 1;
 
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                        $thatSunday = $row2['sunday'];
-                        $role_list_index = 0;
-                        echo "
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $thatSunday = $row2['sunday'];
+                    $role_list_index = 0;
+                    echo "
                             <tr id='row$index'>
                             
                                 <td>" . $row2['sunday'] . "</td>";
-                        $index++;
-                        for ($i = 0; $i < $row_counts; $i++) {
-                            // 3 start
-                            //select helper
-                            echo "<td class='wrapper'>";
-                            echo "<div class='cellcontent'>";
-                            $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" . $role_id_list[$i] . ")";
-                            $result3 = $conn->query($sql3);
-                            echo "<label>Helper</label>";
-                            // echo "<select name='".$thatSunday.'['.$role_list[$role_list_index]."]'class='helper_select' ><option disabled selected></option>";//onchange='func(row$index,this.value);'
-                            echo "<select name='helper_select' class='helper_select' ><option disabled selected></option>"; //onchange='func(row$index,this.value);'
-                            if ($result3->num_rows > 0) {
-                                while ($row3 = mysqli_fetch_assoc($result3)) {
-                                    echo "<option 
+                    $index++;
+                    for ($i = 0; $i < $row_counts; $i++) {
+                        // 3 start
+                        //select helper
+                        echo "<td class='wrapper'>";
+                        echo "<div class='cellcontent'>";
+                        $sql3 = "SELECT id, tname FROM service_helper where id in (select helper_id_fk from ct_role_helper where role_id_fk =" . $role_id_list[$i] . ")";
+                        $result3 = $conn->query($sql3);
+                        echo "<label>Helper</label>";
+                        // echo "<select name='".$thatSunday.'['.$role_list[$role_list_index]."]'class='helper_select' ><option disabled selected></option>";//onchange='func(row$index,this.value);'
+                        echo "<select name='helper_select' class='helper_select' ><option disabled selected></option>"; //onchange='func(row$index,this.value);'
+                        if ($result3->num_rows > 0) {
+                            while ($row3 = mysqli_fetch_assoc($result3)) {
+                                echo "<option 
                                                     value='" . $row3['id'] . "|'
                                                     data-type=helper
                                                     data-value='" . $row3['tname'] . "'
                                                     data-date='" . $thatSunday . "'
                                                     data-role='" . [$role_list[$role_list_index]] . "'"
-                                        . ">" . $row3['tname'] . "</option>";
-                                }
+                                    . ">" . $row3['tname'] . "</option>";
                             }
-                            echo "</select>";
-                            echo "</br>";
-                            // 3 end
-                            // 4 start
-                            //select group
-                            $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" . $role_id_list[$i] . ")";
-                            $result4 = $conn->query($sql4);
-                            echo "<label>Group</label>";
-                            echo "<select name='group_select'class='group_select'><option disabled selected></option>";
-                            if ($result4->num_rows > 0) {
-                                while ($row4 = mysqli_fetch_assoc($result4)) {
-                                    echo "<option 
+                        }
+                        echo "</select>";
+                        echo "</br>";
+                        // 3 end
+                        // 4 start
+                        //select group
+                        $sql4 = "SELECT id, tname FROM service_group where id in (select group_id_fk from ct_role_group where role_id_fk =" . $role_id_list[$i] . ")";
+                        $result4 = $conn->query($sql4);
+                        echo "<label>Group</label>";
+                        echo "<select name='group_select'class='group_select'><option disabled selected></option>";
+                        if ($result4->num_rows > 0) {
+                            while ($row4 = mysqli_fetch_assoc($result4)) {
+                                echo "<option 
                                             value='" . $row4['id'] . "'
                                             data-type=group
                                             data-value='" . $row4['tname'] . "'
                                             data-date='" . $thatSunday . "'
                                             data-role='" . [$role_list[$role_list_index]] . "'"
-                                        . ">" . $row4['tname'] . "</option>";
-                                }
+                                    . ">" . $row4['tname'] . "</option>";
                             }
-                            echo "</select>";
-                            echo "</div>";
-                            echo "<span class='destination'></span>";
-                            echo "</td>";
-                            $role_list_index = $role_list_index + 1;
                         }
-
-                        echo "</tr>";
+                        echo "</select>";
+                        echo "</div>";
+                        echo "<span class='destination'></span>";
+                        echo "</td>";
+                        $role_list_index = $role_list_index + 1;
                     }
+
+                    echo "</tr>";
                 }
-                // 2 end
-                echo "</table>";
             }
-            ?>
-        </div>
-        <button type="submit" name="submit" id="submit">Submit Form</button>
-    </form>
-</body>
+            // 2 end
+            echo "</table>";
+        }
+        ?>
+    </div>
+    <button type="submit" name="submit" id="submit">Submit Form</button>
+</form>
+
 <script>
     $(() => $('table').addClass("full-width"));
 
@@ -281,10 +259,7 @@ If two persons, make them form a group/team at page <a href='../pages/ServiceGro
     }
 </script>
 
-</html>
 
-<!-- put at end -->
-<script>
-    $("button").toggleClass("button-8");
-    $("button").attr("role", "button");
-</script>
+<?php
+include_once "footer.php";
+?>

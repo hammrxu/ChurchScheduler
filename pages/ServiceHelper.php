@@ -1,52 +1,36 @@
-<!-- db connection start-->
 <?php
-require_once "../Config/db.php"
+$title = "Manage Helper | Church Scheduler";
+$fileName = "ServiceHelper";
+include_once "header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Scheduler</title>
-    <link href="../css/main.css" rel="stylesheet">
-    <link href="../css/nav.css" rel="stylesheet">
+<script src="../components/add_form.js"></script>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../components/add_form.js"></script>
-</head>
+<div>
+    <span class="system"></span>
+    <div id="manipulate_display"></div>
+    <div id="add_instance" class="helper_detail_box"></div>
+    <iframe name="dummyframe" style="display:none;"></iframe>
+    <table class='styled-table'>
+        <caption style='text-transform: capitalize;'>service helper management</caption>
+        <thead>
+            <tr>
+                <td>helper</td>
+                <td>manage</td>
+            </tr>
+        </thead>
 
-<body>
-    <?php
-    require_once("../components/navBar.php");
-    ?>
-
-    <div>
-        <span class="system"></span>
-        <div id="manipulate_display"></div>
-        <div id="add_instance" class="helper_detail_box"></div>
-        <iframe name="dummyframe" style="display:none;"></iframe>
-        <table class='styled-table'>
-            <caption style='text-transform: capitalize;'>service helper management</caption>
-            <thead>
-                <tr>
-                    <td>helper</td>
-                    <td>manage</td>
-                </tr>
-            </thead>
-
-            <?php
-            // different
-            $table = "service_helper";
-            $sql = "SELECT id,tname FROM {$table} order by tname ASC";
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "
+        <?php
+        // different
+        $table = "service_helper";
+        $sql = "SELECT id,tname FROM {$table} order by tname ASC";
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "
                                 <tr>
                                     <td value=" . $row['id'] . ">" . $row["tname"] . "</td>
                                     <td>
@@ -54,14 +38,13 @@ require_once "../Config/db.php"
                                         <button class='edit_instance_detail cap fixed-button'>edit</button>
                                     </td>
                                 </tr>";
-                }
             }
-            ?>
-        </table>
-    </div>
-</body>
+        }
+        ?>
+    </table>
+</div>
 
-<script src="../js/main.js"></script>
+
 <script>
     //equiv buttons real helper name   ==>  $(this).parent().prev().html() 
     //id   =>>    $(this).parent().prev().attr("value");
@@ -168,8 +151,7 @@ require_once "../Config/db.php"
     });
 </script>
 
-<!-- put at end -->
-<script>
-    $("button").toggleClass("button-8");
-    $("button").attr("role", "button");
-</script>
+
+<?php
+include_once "footer.php";
+?>

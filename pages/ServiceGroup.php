@@ -1,122 +1,106 @@
-<!-- db connection start-->
 <?php
-require_once "../Config/db.php"
+$title = "Manage Group | Church Scheduler";
+$fileName = "ServiceGroup";
+include_once "header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Scheduler</title>
-    <link href="../css/main.css" rel="stylesheet">
-    <link href="../css/nav.css" rel="stylesheet">
+<script src="../components/add_form.js"></script>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../components/add_form.js"></script>
-</head>
+<div>
+    <span class="system"></span>
+    <div id="manipulate_display"></div>
+    <div id="show_add_instance">
+    </div>
+    <iframe name="dummyframe" style="display:none;"></iframe>
+    <table class='styled-table'>
+        <caption style='text-transform: capitalize;'>service group management</caption>
+        <thead>
+            <tr>
+                <td>group</td>
+                <td>manage</td>
+                <td>helpers
+                <td>add helper</td>
+                <td>del helper</td>
+            </tr>
+        </thead>
+        <?php
+        // different
+        $table = "service_group";
+        $sql = "SELECT id,tname FROM {$table} order by tname ASC";
 
-<body>
-    <?php
-    require_once("../components/navBar.php");
-    ?>
-    <div>
-        <span class="system"></span>
-        <div id="manipulate_display"></div>
-        <div id="show_add_instance">
-        </div>
-        <iframe name="dummyframe" style="display:none;"></iframe>
-        <table class='styled-table'>
-            <caption style='text-transform: capitalize;'>service group management</caption>
-            <thead>
-                <tr>
-                    <td>group</td>
-                    <td>manage</td>
-                    <td>helpers
-                    <td>add helper</td>
-                    <td>del helper</td>
-                </tr>
-            </thead>
-            <?php
-            // different
-            $table = "service_group";
-            $sql = "SELECT id,tname FROM {$table} order by tname ASC";
-
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $sql2 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = " . $row['id'];
-                    $result2 = $conn->query($sql2);
-                    $nameList = '';
-                    if ($result2->num_rows > 0) {
-                        while ($row2 = $result2->fetch_assoc()) {
-                            $nameList .= $row2['hname'];
-                            $nameList .= ", ";
-                        }
-                        $nameList = substr($nameList, 0, -2);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $sql2 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = " . $row['id'];
+                $result2 = $conn->query($sql2);
+                $nameList = '';
+                if ($result2->num_rows > 0) {
+                    while ($row2 = $result2->fetch_assoc()) {
+                        $nameList .= $row2['hname'];
+                        $nameList .= ", ";
                     }
-                    echo "
+                    $nameList = substr($nameList, 0, -2);
+                }
+                echo "
                                 <tr>
                                     <td value=" . $row['id'] . ">" . $row['tname'] . "</td>
                                     <td>
                                         <button class='delete_instance cap fixed-button'>delete</button>
                                         <button class='edit_instance_name cap fixed-button'>rename</button>
                                     </td>";
-                    //show helpers
-                    echo "<td>" . $nameList . "</td>";
-                    //add helper
-                    echo "
+                //show helpers
+                echo "<td>" . $nameList . "</td>";
+                //add helper
+                echo "
                                     <td>
                                         <form action='../controller/ConAddHelperToGroup.php' target='dummyframe' method='POST'>
                                             <select name='helper_id' id='cars'>
                                 ";
-                    $sql3 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_group_helper.helper_id_fk FROM ct_group_helper where group_id_fk = " . $row['id'] . ")";
-                    $result3 = $conn->query($sql3);
-                    if ($result3->num_rows > 0) {
-                        echo " <option disabled selected value>  </option>";
-                        while ($row3 = $result3->fetch_assoc()) {
-                            echo "<option value = " . $row3['id'] . ">" . $row3['tname'] . "</option>";
-                        }
+                $sql3 = "SELECT tname, id FROM service_helper WHERE service_helper.id NOT IN (SELECT ct_group_helper.helper_id_fk FROM ct_group_helper where group_id_fk = " . $row['id'] . ")";
+                $result3 = $conn->query($sql3);
+                if ($result3->num_rows > 0) {
+                    echo " <option disabled selected value>  </option>";
+                    while ($row3 = $result3->fetch_assoc()) {
+                        echo "<option value = " . $row3['id'] . ">" . $row3['tname'] . "</option>";
                     }
-                    echo "</select>
+                }
+                echo "</select>
                                             <input type='hidden' name='group_id' value=" . $row['id'] . ">
                                             <button type='submit' class='connect cap fixed-button2 ' onclick='setTimeout(function() {location.reload();}, 100);'>Add Helper</button>
                                         </form>
                                         
                                     </td>
                                 ";
-                    // del helper
-                    echo "
+                // del helper
+                echo "
                                 <td>
                                         <form action='../controller/ConRemoveHelperToGroup.php' target='dummyframe' method='POST'>
                                             <select name='helper_id' id='cars'>
                                 ";
-                    $sql5 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = " . $row['id'];
-                    $result5 = $conn->query($sql5);
-                    if ($result5->num_rows > 0) {
-                        echo " <option disabled selected value> </option>";
-                        while ($row5 = $result5->fetch_assoc()) {
-                            echo "<option value = " . $row5['helper_id_fk'] . ">" . $row5['hname'] . "</option>";
-                        }
+                $sql5 = "SELECT service_group.id,service_group.tname,ct_group_helper.helper_id_fk,service_helper.tname as hname FROM service_group LEFT JOIN ct_group_helper ON ct_group_helper.group_id_fk = service_group.id LEFT JOIN service_helper ON ct_group_helper.helper_id_fk = service_helper.id where service_group.id = " . $row['id'];
+                $result5 = $conn->query($sql5);
+                if ($result5->num_rows > 0) {
+                    echo " <option disabled selected value> </option>";
+                    while ($row5 = $result5->fetch_assoc()) {
+                        echo "<option value = " . $row5['helper_id_fk'] . ">" . $row5['hname'] . "</option>";
                     }
-                    echo "</select>
+                }
+                echo "</select>
                                             <input type='hidden' name='group_id' value=" . $row['id'] . ">
                                             <button type='submit' class='connect cap fixed-button2' onclick='setTimeout(function() {location.reload();}, 100);'>del Helper</button>
                                         </form>
                                     </td>
                                             
                                 </tr>";
-                }
             }
-            ?>
-        </table>
+        }
+        ?>
+    </table>
 
-    </div>
-</body>
+</div>
 
 <script src="../js/main.js"></script>
 <script>
@@ -214,8 +198,7 @@ require_once "../Config/db.php"
     }
 </script>
 
-<!-- put at end -->
-<script>
-    $("button").toggleClass("button-8");
-    $("button").attr("role", "button");
-</script>
+
+<?php
+include_once "footer.php";
+?>

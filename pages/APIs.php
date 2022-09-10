@@ -1,54 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Church Scheduler</title>
-	<link href="../css/nav.css" rel="stylesheet">
-	<link href="../css/apis.css" rel="stylesheet">
-
-
-	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="../components/add_form.js"></script>
-</head>
+<?php
+$title = "REST APIs | Church Scheduler";
+$fileName = "APIs";
+include_once "header.php";
+?>
 
 <body>
-	<?php
-	require_once("../components/navBar.php");
-	?>
+
 	<iframe name="dummyframe" style="display:none;"></iframe>
 	<!-- Pushy Menu -->
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 	<div class="wrapper">
 
-		<div class="top_navbar">
-			<div class="logo">
-				<a href="#">Coding Market</a>
-			</div>
-			<div class="top_menu">
-				<div class="home_link">
-					<a href="#" onclick="window.location.reload();">
-						<span class="icon"><i class="fas fa-home"></i></span>
-						<span>Home</span>
-					</a>
-				</div>
-				<div class="right_info">
-					<div class="icon_wrap">
-						<div class="icon">
-							<i class="fas fa-bell"></i>
-						</div>
-					</div>
-					<div class="icon_wrap">
-						<div class="icon">
-							<i class="fas fa-cog"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
 
 		<div class="main_body">
 
@@ -139,10 +103,7 @@
 	</div>
 
 </body>
-<script>
-	$(".hamburger").click(function() {
-		$(".wrapper").toggleClass("active")
-	})
-</script>
+s
+<script src="../js/APIs.js"></script>
 
 </html>
